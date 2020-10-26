@@ -81,6 +81,13 @@ public class Pacient {
     public void setSexo(char sexo) {
         this.sexo = sexo;
     }
+    public String getFechaNac() {
+        return fechaNac;
+    }
+
+    public void setFechaNac(String fechaNac) {
+        this.fechaNac = fechaNac;
+    }
     //propieties
     private String id;
     private String nombre;
@@ -92,4 +99,6 @@ public class Pacient {
     private double estatura;
     private String telefono;
     private char sexo;
+    private String fechaNac;
+
 }
