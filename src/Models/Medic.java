@@ -22,8 +22,51 @@ public class Medic {
     public String getPassword(){return this.password;}
     public String getHistoricalMedic(int id){return this.password;}
     public void updateHistoricalMedic(int id, History history){}
+    public String getMedicId() {
+        return medicId;
+    }
+
+    public void setMedicId(String medicId) {
+        this.medicId = medicId;
+    }
+
+    public int getEspeciality() {
+        return especiality;
+    }
+
+    public void setEspeciality(int especiality) {
+        this.especiality = especiality;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
     //propieties
     private String telephone;
     private String password;
+    private String medicId;
+    private int especiality;
+    private String name;
+    private String firstName;
+    private String lastName;
     private GestorDB database;
 }
