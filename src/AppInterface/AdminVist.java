@@ -30,6 +30,10 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
+        jLabel63 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
@@ -132,6 +136,7 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         dateCite = new com.toedter.calendar.JDateChooser();
         addCitePB = new javax.swing.JButton();
+        jLabel52 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
@@ -142,10 +147,32 @@ public class AdminVist extends javax.swing.JFrame {
         dateCiteModify = new com.toedter.calendar.JDateChooser();
         citeModifyPB = new javax.swing.JButton();
         confirmDialogModifyCite = new javax.swing.JCheckBox();
+        jLabel53 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        citeIdToDelete = new javax.swing.JTextField();
+        confirmDialogToDeleteCite = new javax.swing.JCheckBox();
+        deleteCitePB = new javax.swing.JButton();
+        jLabel51 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel54 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        jTabbedPane6 = new javax.swing.JTabbedPane();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        adminNewPassword = new javax.swing.JPasswordField();
+        adminLastPassword = new javax.swing.JPasswordField();
+        adminConfirmThePassword = new javax.swing.JPasswordField();
+        changeAdminPasswordPB = new javax.swing.JButton();
+        jLabel59 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
 
         jLabel26.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel26.setText("Especialidad");
@@ -156,19 +183,52 @@ public class AdminVist extends javax.swing.JFrame {
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jTabbedPane1.setToolTipText("");
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTabbedPane1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
 
-        jPanel1.setBackground(java.awt.Color.darkGray);
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-hospital-3-96.png"))); // NOI18N
+
+        jLabel61.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        jLabel61.setText("<html>\n<p>\n<b>MedicalDatabase</b> es una solución que intregra, tanto a médicos como al personal autorizado<br/>\nen el su objetivo principal es facilitar el control y gestión de su enterono de trabajo \n</p>\n</html>");
+
+        jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-hospital-gown-96.png"))); // NOI18N
+
+        jLabel63.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
+        jLabel63.setText("<html>\n<p>\nPara comenzar a usar la aplicación puede hacer click en <br/>\nlos distintos menús (ejemplo Pacientes), para iniciar su gestion.<br/>\nQue tenga un buen día estimado administrador\n</p>\n</html>");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 711, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel62)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel60)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel60))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel62))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Inicio", jPanel1);
@@ -282,14 +342,13 @@ public class AdminVist extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(sex, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(userHeigth, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                                .addComponent(userPhone)
-                                .addComponent(userDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton1))
-                        .addGap(39, 39, 39))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1)
+                            .addComponent(sex, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(userPhone)
+                            .addComponent(userHeigth)
+                            .addComponent(userDate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                        .addGap(62, 62, 62))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel39)
                         .addGap(77, 77, 77))))
@@ -300,7 +359,7 @@ public class AdminVist extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -450,9 +509,9 @@ public class AdminVist extends javax.swing.JFrame {
                             .addComponent(userLastnameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(userTelephoneEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(65, 65, 65)
+                .addGap(129, 129, 129)
                 .addComponent(jLabel40)
-                .addGap(196, 196, 196))
+                .addGap(132, 132, 132))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(confirmDialogEdit)
@@ -468,9 +527,7 @@ public class AdminVist extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel40)))
+                            .addComponent(jLabel40))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(userIdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -496,7 +553,7 @@ public class AdminVist extends javax.swing.JFrame {
                     .addComponent(userSexEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(editPB)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(unlockFields)
@@ -526,6 +583,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         confirmPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         confirmPB.setText("Eliminar paciente");
+        confirmPB.setEnabled(false);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -572,7 +630,7 @@ public class AdminVist extends javax.swing.JFrame {
         jTabbedPane1.addTab("Pacientes", jPanel2);
 
         jPanel3.setBackground(java.awt.Color.darkGray);
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         jTabbedPane3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
@@ -619,6 +677,7 @@ public class AdminVist extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-add-32 (1).png"))); // NOI18N
         jButton2.setText("Agregar Médico");
+        jButton2.setEnabled(false);
 
         jLabel28.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel28.setText("Cedula Profesional");
@@ -672,7 +731,7 @@ public class AdminVist extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(279, 279, 279)
                 .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
                 .addComponent(jLabel31)
                 .addGap(76, 76, 76))
         );
@@ -764,6 +823,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         editMedicPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         editMedicPB.setText("Editar Médico");
+        editMedicPB.setEnabled(false);
 
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
         jLabel38.setToolTipText("<html>\n<p>\nSección del menú que modifica un médico existente\n<strong>Nota:</strong>Los campos bloqueados son información<br/>\nque se puede modificar pero no es común o necesita previa sutorización<br/>\nsi obtuvo autorización marque la casilla <b>\"Modificar campos bloqueados\"</b>\n</p>\n</html>\n");
@@ -801,7 +861,7 @@ public class AdminVist extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(263, 263, 263)
                 .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addComponent(jLabel38)
                 .addGap(98, 98, 98))
         );
@@ -841,7 +901,7 @@ public class AdminVist extends javax.swing.JFrame {
                         .addComponent(editMedicPB)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(confirmDialogMedic)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Modificar", jPanel10);
@@ -865,6 +925,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         deleteMedicPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         deleteMedicPB.setText("Eliminar médico");
+        deleteMedicPB.setEnabled(false);
         deleteMedicPB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteMedicPBActionPerformed(evt);
@@ -876,7 +937,7 @@ public class AdminVist extends javax.swing.JFrame {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addGap(0, 85, Short.MAX_VALUE)
+                .addGap(0, 78, Short.MAX_VALUE)
                 .addComponent(confirmDeleteMedic)
                 .addGap(66, 66, 66))
             .addGroup(jPanel11Layout.createSequentialGroup()
@@ -907,7 +968,7 @@ public class AdminVist extends javax.swing.JFrame {
                 .addComponent(confirmDeleteMedic)
                 .addGap(35, 35, 35)
                 .addComponent(deleteMedicPB)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Eliminar", jPanel11);
@@ -917,7 +978,7 @@ public class AdminVist extends javax.swing.JFrame {
         jTabbedPane1.addTab("Medicos", jPanel3);
 
         jPanel4.setBackground(java.awt.Color.darkGray);
-        jPanel4.setLayout(new java.awt.GridLayout());
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
         jTabbedPane4.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -947,10 +1008,21 @@ public class AdminVist extends javax.swing.JFrame {
         addCitePB.setBorder(null);
         addCitePB.setEnabled(false);
 
+        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel52.setToolTipText("<html>\n<p>\nEn esta sección nos permitirá registrar nuevas citas con un médico<br/>\nun paiente y dia acordados\n</p>\n</html>");
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(addCitePB, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(266, 266, 266))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel52)
+                .addGap(25, 25, 25))
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
@@ -967,16 +1039,14 @@ public class AdminVist extends javax.swing.JFrame {
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(302, 302, 302)
                         .addComponent(jLabel41)))
-                .addContainerGap(159, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(addCitePB, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(266, 266, 266))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addContainerGap()
+                .addComponent(jLabel52)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel41)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -992,7 +1062,7 @@ public class AdminVist extends javax.swing.JFrame {
                     .addComponent(dateCite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(addCitePB, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Registrar", jPanel12);
@@ -1025,14 +1095,13 @@ public class AdminVist extends javax.swing.JFrame {
 
         confirmDialogModifyCite.setText("He notificado al paciente y al médico sobre el cambio en la cita");
 
+        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel53.setToolTipText("<html>\n<p>\nEn esta sección del menú modificarás una cita existente, para ello<br/>\nIngresarás el número de cita, el identificador del medico (si es que cambio)<br/>\ny en caso de que haya cambiado la fecha de atencion indicada\n</p>\n</html>");
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(citeModifyPB)
-                .addGap(297, 297, 297))
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -1052,12 +1121,23 @@ public class AdminVist extends javax.swing.JFrame {
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(confirmDialogModifyCite)))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(citeModifyPB)
+                        .addGap(297, 297, 297))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(jLabel53)
+                        .addGap(26, 26, 26))))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addContainerGap()
+                .addComponent(jLabel53)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel45)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1075,7 +1155,7 @@ public class AdminVist extends javax.swing.JFrame {
                 .addComponent(citeModifyPB)
                 .addGap(33, 33, 33)
                 .addComponent(confirmDialogModifyCite)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Modificar ", jPanel13);
@@ -1084,34 +1164,109 @@ public class AdminVist extends javax.swing.JFrame {
 
         jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-delete-bookmark-96.png"))); // NOI18N
 
+        jLabel50.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel50.setText("Número cita");
+
+        citeIdToDelete.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        confirmDialogToDeleteCite.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        confirmDialogToDeleteCite.setText("He notificado al paciente y el médico los motivos de cancelación de la cita");
+
+        deleteCitePB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        deleteCitePB.setText("Eliminar Cita");
+        deleteCitePB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        deleteCitePB.setEnabled(false);
+
+        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel51.setToolTipText("<html>\n<p>\nEsta sección del menú elimina una cita previamente registrada<br/>\n<b>Nota:</b>Para eliminar la cita debe marcar la casilla corresponiente\n</p>\n</html>");
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(199, 199, 199)
+                        .addComponent(jLabel50)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(citeIdToDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(confirmDialogToDeleteCite))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(314, 314, 314)
+                        .addComponent(deleteCitePB, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(124, Short.MAX_VALUE))
+            .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(293, 293, 293)
                 .addComponent(jLabel49)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel51)
+                .addGap(20, 20, 20))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel49)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel49))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel51)))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel50)
+                    .addComponent(citeIdToDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(confirmDialogToDeleteCite)
+                .addGap(18, 18, 18)
+                .addComponent(deleteCitePB, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Eliminar", jPanel14);
+
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel54.setToolTipText("<html>\n<p>\nEsta parte del menu muestra las citas no atendidas<br/>\no de un paciente en concreto\n</p>\n</html>");
+
+        jButton3.setBackground(java.awt.Color.darkGray);
+        jButton3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Mostrar Citas");
+        jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel54)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(300, 300, 300))))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 417, Short.MAX_VALUE)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addComponent(jLabel54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Mostrar", jPanel15);
@@ -1121,17 +1276,107 @@ public class AdminVist extends javax.swing.JFrame {
         jTabbedPane1.addTab("Citas", jPanel4);
 
         jPanel5.setBackground(java.awt.Color.darkGray);
+        jPanel5.setLayout(new java.awt.GridLayout());
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 711, Short.MAX_VALUE)
+        jTabbedPane6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-edit-user-96.png"))); // NOI18N
+
+        jLabel56.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel56.setText("Nueva contraseña");
+
+        jLabel57.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel57.setText("Contraseña anterior");
+
+        jLabel58.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel58.setText("Confirmar contraseña");
+
+        adminNewPassword.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        adminLastPassword.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        adminLastPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminLastPasswordActionPerformed(evt);
+            }
+        });
+
+        adminConfirmThePassword.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        changeAdminPasswordPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        changeAdminPasswordPB.setText("Cambiar contraseña");
+
+        jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel59.setToolTipText("<html>\n<p>\nPara cambiar tu contraseña deberás proporionar la<br/>\n<b>contraseña anterior</b>, ademas de ingresar y confirmar<br/>\nla nueva contraseña\n</p>\n</html>");
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(jLabel55))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel57)
+                            .addComponent(jLabel56)
+                            .addComponent(jLabel58))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(changeAdminPasswordPB)
+                            .addComponent(adminConfirmThePassword, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                            .addComponent(adminNewPassword)
+                            .addComponent(adminLastPassword))))
+                .addContainerGap(164, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel59)
+                .addGap(74, 74, 74))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel59)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel55)
+                .addGap(43, 43, 43)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel57)
+                    .addComponent(adminLastPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel56)
+                    .addComponent(adminNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel58)
+                    .addComponent(adminConfirmThePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(changeAdminPasswordPB)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
+
+        jTabbedPane6.addTab("Cambiar contraseña", jPanel17);
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 699, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 429, Short.MAX_VALUE)
+        );
+
+        jTabbedPane6.addTab("Cerrar sesión", jPanel18);
+
+        jPanel5.add(jTabbedPane6);
 
         jTabbedPane1.addTab("Opciones", jPanel5);
 
@@ -1193,6 +1438,10 @@ public class AdminVist extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_citeIdModify1ActionPerformed
 
+    private void adminLastPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLastPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminLastPasswordActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1231,22 +1480,30 @@ public class AdminVist extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField LastName;
     private javax.swing.JButton addCitePB;
+    private javax.swing.JPasswordField adminConfirmThePassword;
+    private javax.swing.JPasswordField adminLastPassword;
+    private javax.swing.JPasswordField adminNewPassword;
     private javax.swing.JSpinner age;
+    private javax.swing.JButton changeAdminPasswordPB;
     private javax.swing.JTextField citeIdModify1;
+    private javax.swing.JTextField citeIdToDelete;
     private javax.swing.JButton citeModifyPB;
     private javax.swing.JCheckBox confirmDeleteMedic;
     private javax.swing.JCheckBox confirmDialogEdit;
     private javax.swing.JCheckBox confirmDialogMedic;
     private javax.swing.JCheckBox confirmDialogModifyCite;
+    private javax.swing.JCheckBox confirmDialogToDeleteCite;
     private javax.swing.JButton confirmPB;
     private com.toedter.calendar.JDateChooser dateCite;
     private com.toedter.calendar.JDateChooser dateCiteModify;
+    private javax.swing.JButton deleteCitePB;
     private javax.swing.JButton deleteMedicPB;
     private javax.swing.JButton editMedicPB;
     private javax.swing.JButton editPB;
     private javax.swing.JTextField firstName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1293,7 +1550,21 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1304,6 +1575,8 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1313,11 +1586,14 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
+    private javax.swing.JTabbedPane jTabbedPane6;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
