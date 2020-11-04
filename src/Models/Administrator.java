@@ -17,7 +17,12 @@ public class Administrator {
         this.database = null;
         this.pacient = null;
     }
-    public void addPacient(Pacient pacient){}
+    public void openConnection(){
+        //metodo para la apertura de la base de datos
+        this.database = new GestorDB();
+        database.openConection();
+    }
+    public void addPacient(Pacient pacient, java.sql.Date date){}
     public void deletePacient(int id){}
     public void updatePacient(Pacient pacient){}
     public void addMedic(){}

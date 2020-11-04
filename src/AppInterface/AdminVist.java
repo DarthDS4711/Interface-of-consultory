@@ -5,6 +5,8 @@
  */
 package AppInterface;
 
+import Models.Pacient;
+import Program.Server;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -1599,13 +1601,17 @@ public class AdminVist extends javax.swing.JFrame {
         int userAge = (Integer) this.age.getValue();
         double userCurrentWeigth = 0.0;
         try {
-            userCurrentWeigth = Double.parseDouble(this.userWeigth.getText());
+            String prev = this.userWeigth.getText();
+            if(prev.length() > 0)
+                userCurrentWeigth = Double.parseDouble(prev);
         } catch (Error e) {
             JOptionPane.showMessageDialog(null, "El tipo de dato introducido no es correcto, ese debe de ser como : X.X");
         }
         double userCurrentHeigth = 0.0;
         try {
-            userCurrentHeigth = Double.parseDouble(this.userWeigth.getText());
+            String prev = this.userWeigth.getText();
+            if(prev.length() > 0)
+                userCurrentHeigth = Double.parseDouble(prev);
         } catch (Error e) {
             JOptionPane.showMessageDialog(null, "El tipo de dato introducido no es correcto, ese debe de ser como : X.X");
         }
@@ -1622,7 +1628,21 @@ public class AdminVist extends javax.swing.JFrame {
         long dateInLong = preDate.getTime();
         java.sql.Date date = new java.sql.Date(dateInLong);
         JOptionPane.showMessageDialog(null, date);
-
+        int validate = nameUser.length() + userLastName1.length() + userLastName2.length() + telephoneUser.length();
+        if(validate >= 13){
+            if((userCurrentWeigth >= 5.0 && userCurrentWeigth <= 400.0) && (userCurrentHeigth >= 0.2 && userCurrentHeigth <= 2.50)){
+                Pacient p = new Pacient();
+                p.setNombre(nameUser);
+                p.setApellido1(userLastName1);
+                p.setApellido2(userLastName2);
+                p.setEdad(userAge);
+                p.setPeso(userCurrentWeigth);
+                p.setEstatura(userCurrentHeigth);
+                p.setTelefono(telephoneUser);
+                p.setSexo(userSex);
+                server.addPacient(p, date);
+            }
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1804,6 +1824,7 @@ public class AdminVist extends javax.swing.JFrame {
     }
     //propieties of system
     private String password;
+    private Server server = new Server();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField LastName;
     private javax.swing.JButton addCitePB;
