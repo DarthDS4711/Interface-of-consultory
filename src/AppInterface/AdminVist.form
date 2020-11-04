@@ -122,7 +122,7 @@
             <Component class="javax.swing.JLabel" name="jLabel60">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/AppInterface/icons8-hospital-3-96.png"/>
+                  <Image iconType="3" name="/Images/icons8-hospital-3-96.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -137,7 +137,7 @@
             <Component class="javax.swing.JLabel" name="jLabel62">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/AppInterface/icons8-hospital-gown-96.png"/>
+                  <Image iconType="3" name="/Images/icons8-hospital-gown-96.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -442,6 +442,9 @@
                     <Component class="javax.swing.JTextField" name="userHeigth">
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="userDate">
+                      <Properties>
+                        <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
@@ -454,25 +457,28 @@
                     <Component class="javax.swing.JButton" name="jButton1">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-add-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-add-32.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Agregar Paciente"/>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                           <Color id="Cursor de Mano"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel11">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="2" name="F:\Archivos\Java\Aplicaciones\Icons\icons8-registration-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-registration-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel39">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="En esta secci&#xf3;n de men&#xfa; se registrar&#xe1;n nuevos usuarios"/>
                       </Properties>
@@ -616,7 +622,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel13">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="2" name="F:\Archivos\Java\Aplicaciones\Icons\icons8-edit-user-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-edit-user-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -740,6 +746,7 @@
                         </Property>
                       </Properties>
                       <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="editPBStateChanged"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editPBActionPerformed"/>
                       </Events>
                     </Component>
@@ -761,11 +768,14 @@
                           <Color id="Cursor de Mano"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmDialogEditActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel40">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p&gt;&#xa;En esta secci&#xf3;n del men&#xfa; se modificar&#xe1; un usuario existente&lt;br/&gt;&#xa;&lt;strong&gt;Nota:&lt;/strong&gt; los campos bloqueados corresponden a informaci&#xf3;n poco solicitada a modificar,&lt;br/&gt;&#xa;si necesita cambiarlos seleccione el campo &quot;Modificar campos bloqueados&quot;&#xa;&lt;/p&gt;&#xa;&lt;/html&gt;&#xa;"/>
                       </Properties>
@@ -795,7 +805,7 @@
                                       <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="userID" min="-2" pref="223" max="-2" attributes="0"/>
+                                      <Component id="deleteUserID" min="-2" pref="223" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
@@ -822,7 +832,7 @@
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="userID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="deleteUserID" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="responsability" min="-2" max="-2" attributes="0"/>
@@ -837,7 +847,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel10">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="2" name="F:\Archivos\Java\Aplicaciones\Icons\icons8-banned-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-banned-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -849,7 +859,7 @@
                         <Property name="text" type="java.lang.String" value="Identificador del paciente"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="userID">
+                    <Component class="javax.swing.JTextField" name="deleteUserID">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Verdana" size="12" style="0"/>
@@ -875,6 +885,9 @@
                         <Property name="text" type="java.lang.String" value="Eliminar paciente"/>
                         <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmPBActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1045,7 +1058,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel21">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-registration-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-registration-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -1160,7 +1173,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-add-32 (1).png"/>
+                          <Image iconType="3" name="/Images/icons8-add-32 (1).png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Agregar M&#xe9;dico"/>
                         <Property name="enabled" type="boolean" value="false"/>
@@ -1184,7 +1197,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel31">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="Secci&#xf3;n del men&#xfa; para registrar un m&#xe9;dico"/>
                       </Properties>
@@ -1304,7 +1317,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel32">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-edit-user-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-edit-user-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -1411,7 +1424,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel38">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p&gt;&#xa;Secci&#xf3;n del men&#xfa; que modifica un m&#xe9;dico existente&#xa;&lt;strong&gt;Nota:&lt;/strong&gt;Los campos bloqueados son informaci&#xf3;n&lt;br/&gt;&#xa;que se puede modificar pero no es com&#xfa;n o necesita previa sutorizaci&#xf3;n&lt;br/&gt;&#xa;si obtuvo autorizaci&#xf3;n marque la casilla &lt;b&gt;&quot;Modificar campos bloqueados&quot;&lt;/b&gt;&#xa;&lt;/p&gt;&#xa;&lt;/html&gt;&#xa;"/>
                       </Properties>
@@ -1484,7 +1497,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel29">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-banned-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-banned-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -1653,7 +1666,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel41">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="2" name="F:\Archivos\Java\Aplicaciones\Icons\icons8-petition-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-petition-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -1718,7 +1731,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel52">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p&gt;&#xa;En esta secci&#xf3;n nos permitir&#xe1; registrar nuevas citas con un m&#xe9;dico&lt;br/&gt;&#xa;un paiente y dia acordados&#xa;&lt;/p&gt;&#xa;&lt;/html&gt;"/>
                       </Properties>
@@ -1819,7 +1832,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel45">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-bookmark-book-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-bookmark-book-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -1883,7 +1896,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel53">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p&gt;&#xa;En esta secci&#xf3;n del men&#xfa; modificar&#xe1;s una cita existente, para ello&lt;br/&gt;&#xa;Ingresar&#xe1;s el n&#xfa;mero de cita, el identificador del medico (si es que cambio)&lt;br/&gt;&#xa;y en caso de que haya cambiado la fecha de atencion indicada&#xa;&lt;/p&gt;&#xa;&lt;/html&gt;"/>
                       </Properties>
@@ -1966,7 +1979,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel49">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-delete-bookmark-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-delete-bookmark-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -2010,7 +2023,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel51">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p&gt;&#xa;Esta secci&#xf3;n del men&#xfa; elimina una cita previamente registrada&lt;br/&gt;&#xa;&lt;b&gt;Nota:&lt;/b&gt;Para eliminar la cita debe marcar la casilla corresponiente&#xa;&lt;/p&gt;&#xa;&lt;/html&gt;"/>
                       </Properties>
@@ -2086,7 +2099,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel54">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p&gt;&#xa;Esta parte del menu muestra las citas no atendidas&lt;br/&gt;&#xa;o de un paciente en concreto&#xa;&lt;/p&gt;&#xa;&lt;/html&gt;"/>
                       </Properties>
@@ -2225,7 +2238,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel55">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-edit-user-96.png"/>
+                          <Image iconType="3" name="/Images/icons8-edit-user-96.png"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -2288,7 +2301,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel59">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/AppInterface/icons8-help-32.png"/>
+                          <Image iconType="3" name="/Images/icons8-help-32.png"/>
                         </Property>
                         <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;p&gt;&#xa;Para cambiar tu contrase&#xf1;a deber&#xe1;s proporionar la&lt;br/&gt;&#xa;&lt;b&gt;contrase&#xf1;a anterior&lt;/b&gt;, ademas de ingresar y confirmar&lt;br/&gt;&#xa;la nueva contrase&#xf1;a&#xa;&lt;/p&gt;&#xa;&lt;/html&gt;"/>
                       </Properties>

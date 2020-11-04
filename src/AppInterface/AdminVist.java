@@ -5,6 +5,9 @@
  */
 package AppInterface;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Shadowkiller
@@ -80,7 +83,7 @@ public class AdminVist extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        userID = new javax.swing.JTextField();
+        deleteUserID = new javax.swing.JTextField();
         responsability = new javax.swing.JCheckBox();
         confirmPB = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -187,12 +190,12 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-hospital-3-96.png"))); // NOI18N
+        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-hospital-3-96.png"))); // NOI18N
 
         jLabel61.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jLabel61.setText("<html>\n<p>\n<b>MedicalDatabase</b> es una solución que intregra, tanto a médicos como al personal autorizado<br/>\nen el su objetivo principal es facilitar el control y gestión de su enterono de trabajo \n</p>\n</html>");
 
-        jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-hospital-gown-96.png"))); // NOI18N
+        jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-hospital-gown-96.png"))); // NOI18N
 
         jLabel63.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jLabel63.setText("<html>\n<p>\nPara comenzar a usar la aplicación puede hacer click en <br/>\nlos distintos menús (ejemplo Pacientes), para iniciar su gestion.<br/>\nQue tenga un buen día estimado administrador\n</p>\n</html>");
@@ -289,16 +292,23 @@ public class AdminVist extends javax.swing.JFrame {
             }
         });
 
+        userDate.setDateFormatString("yyyy-MM-dd");
+
         jLabel9.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel9.setText("Fecha Nacimiento");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-add-32.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-add-32.png"))); // NOI18N
         jButton1.setText("Agregar Paciente");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jLabel11.setIcon(new javax.swing.ImageIcon("F:\\Archivos\\Java\\Aplicaciones\\Icons\\icons8-registration-96.png")); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-registration-96.png"))); // NOI18N
 
-        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel39.setToolTipText("En esta sección de menú se registrarán nuevos usuarios");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -409,7 +419,7 @@ public class AdminVist extends javax.swing.JFrame {
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon("F:\\Archivos\\Java\\Aplicaciones\\Icons\\icons8-edit-user-96.png")); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-edit-user-96.png"))); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel14.setText("Nombre");
@@ -451,6 +461,11 @@ public class AdminVist extends javax.swing.JFrame {
         editPB.setForeground(new java.awt.Color(255, 255, 255));
         editPB.setText("Editar Usuario");
         editPB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editPB.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                editPBStateChanged(evt);
+            }
+        });
         editPB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editPBActionPerformed(evt);
@@ -467,8 +482,13 @@ public class AdminVist extends javax.swing.JFrame {
 
         confirmDialogEdit.setText("Actuo conforme la autorización del paciente");
         confirmDialogEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        confirmDialogEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDialogEditActionPerformed(evt);
+            }
+        });
 
-        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel40.setToolTipText("<html>\n<p>\nEn esta sección del menú se modificará un usuario existente<br/>\n<strong>Nota:</strong> los campos bloqueados corresponden a información poco solicitada a modificar,<br/>\nsi necesita cambiarlos seleccione el campo \"Modificar campos bloqueados\"\n</p>\n</html>\n");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -566,12 +586,12 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon("F:\\Archivos\\Java\\Aplicaciones\\Icons\\icons8-banned-96.png")); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-banned-96.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel12.setText("Identificador del paciente");
 
-        userID.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        deleteUserID.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         responsability.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         responsability.setText("Actuo con la certeza, de que el paciente me dio la autorización de eliminar su información");
@@ -584,6 +604,11 @@ public class AdminVist extends javax.swing.JFrame {
         confirmPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         confirmPB.setText("Eliminar paciente");
         confirmPB.setEnabled(false);
+        confirmPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmPBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -595,7 +620,7 @@ public class AdminVist extends javax.swing.JFrame {
                         .addGap(132, 132, 132)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(deleteUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(responsability))
@@ -615,7 +640,7 @@ public class AdminVist extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deleteUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(responsability)
                 .addGap(30, 30, 30)
@@ -636,7 +661,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-registration-96.png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-registration-96.png"))); // NOI18N
 
         jLabel20.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel20.setText("Nombre");
@@ -675,7 +700,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-add-32 (1).png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-add-32 (1).png"))); // NOI18N
         jButton2.setText("Agregar Médico");
         jButton2.setEnabled(false);
 
@@ -684,7 +709,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         jTextField5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel31.setToolTipText("Sección del menú para registrar un médico");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -782,7 +807,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-edit-user-96.png"))); // NOI18N
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-edit-user-96.png"))); // NOI18N
 
         jLabel33.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel33.setText("Nueva contraseña");
@@ -825,7 +850,7 @@ public class AdminVist extends javax.swing.JFrame {
         editMedicPB.setText("Editar Médico");
         editMedicPB.setEnabled(false);
 
-        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel38.setToolTipText("<html>\n<p>\nSección del menú que modifica un médico existente\n<strong>Nota:</strong>Los campos bloqueados son información<br/>\nque se puede modificar pero no es común o necesita previa sutorización<br/>\nsi obtuvo autorización marque la casilla <b>\"Modificar campos bloqueados\"</b>\n</p>\n</html>\n");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -908,7 +933,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-banned-96.png"))); // NOI18N
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-banned-96.png"))); // NOI18N
 
         jLabel30.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel30.setText("Cedula profesional");
@@ -986,7 +1011,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel41.setIcon(new javax.swing.ImageIcon("F:\\Archivos\\Java\\Aplicaciones\\Icons\\icons8-petition-96.png")); // NOI18N
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-petition-96.png"))); // NOI18N
 
         jLabel42.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel42.setText("Identificador del paciente");
@@ -1008,7 +1033,7 @@ public class AdminVist extends javax.swing.JFrame {
         addCitePB.setBorder(null);
         addCitePB.setEnabled(false);
 
-        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel52.setToolTipText("<html>\n<p>\nEn esta sección nos permitirá registrar nuevas citas con un médico<br/>\nun paiente y dia acordados\n</p>\n</html>");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1069,7 +1094,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-bookmark-book-96.png"))); // NOI18N
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-bookmark-book-96.png"))); // NOI18N
 
         jLabel46.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel46.setText("Número Cita");
@@ -1095,7 +1120,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         confirmDialogModifyCite.setText("He notificado al paciente y al médico sobre el cambio en la cita");
 
-        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel53.setToolTipText("<html>\n<p>\nEn esta sección del menú modificarás una cita existente, para ello<br/>\nIngresarás el número de cita, el identificador del medico (si es que cambio)<br/>\ny en caso de que haya cambiado la fecha de atencion indicada\n</p>\n</html>");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -1162,7 +1187,7 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-delete-bookmark-96.png"))); // NOI18N
+        jLabel49.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-delete-bookmark-96.png"))); // NOI18N
 
         jLabel50.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel50.setText("Número cita");
@@ -1177,7 +1202,7 @@ public class AdminVist extends javax.swing.JFrame {
         deleteCitePB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         deleteCitePB.setEnabled(false);
 
-        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel51.setToolTipText("<html>\n<p>\nEsta sección del menú elimina una cita previamente registrada<br/>\n<b>Nota:</b>Para eliminar la cita debe marcar la casilla corresponiente\n</p>\n</html>");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -1234,7 +1259,7 @@ public class AdminVist extends javax.swing.JFrame {
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel54.setToolTipText("<html>\n<p>\nEsta parte del menu muestra las citas no atendidas<br/>\no de un paciente en concreto\n</p>\n</html>");
 
         jButton3.setBackground(java.awt.Color.darkGray);
@@ -1276,13 +1301,13 @@ public class AdminVist extends javax.swing.JFrame {
         jTabbedPane1.addTab("Citas", jPanel4);
 
         jPanel5.setBackground(java.awt.Color.darkGray);
-        jPanel5.setLayout(new java.awt.GridLayout());
+        jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
         jTabbedPane6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-edit-user-96.png"))); // NOI18N
+        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-edit-user-96.png"))); // NOI18N
 
         jLabel56.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel56.setText("Nueva contraseña");
@@ -1307,7 +1332,7 @@ public class AdminVist extends javax.swing.JFrame {
         changeAdminPasswordPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         changeAdminPasswordPB.setText("Cambiar contraseña");
 
-        jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppInterface/icons8-help-32.png"))); // NOI18N
+        jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel59.setToolTipText("<html>\n<p>\nPara cambiar tu contraseña deberás proporionar la<br/>\n<b>contraseña anterior</b>, ademas de ingresar y confirmar<br/>\nla nueva contraseña\n</p>\n</html>");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
@@ -1408,14 +1433,46 @@ public class AdminVist extends javax.swing.JFrame {
 
     private void responsabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responsabilityActionPerformed
         // TODO add your handling code here:
+        if(this.responsability.isSelected()){
+            this.confirmPB.setEnabled(true);
+        }
+        else
+            this.confirmPB.setEnabled(false);
     }//GEN-LAST:event_responsabilityActionPerformed
 
     private void editPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPBActionPerformed
         // TODO add your handling code here:
+        String IDuser = this.deleteUserID.getText();
+        String name;
+        String lastName1;
+        String lastName2;
+        String telephone = this.userTelephoneEdit.getText();
+        char sexUser = '0';
+        if(this.unlockFields.isSelected()){
+            name = this.usernameEdit.getText();
+            lastName1 = this.userFirstNameEdit.getText();
+            lastName2 = this.userLastnameEdit.getText();
+            int indexCurrent = this.userSexEdit.getSelectedIndex();
+            if(indexCurrent == 0)
+                sexUser = 'H';
+            else
+                sexUser = 'M';
+        }
     }//GEN-LAST:event_editPBActionPerformed
 
     private void unlockFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unlockFieldsActionPerformed
         // TODO add your handling code here:
+        if (this.unlockFields.isSelected()) {
+            this.usernameEdit.setEnabled(true);
+            this.userFirstNameEdit.setEnabled(true);
+            this.userLastnameEdit.setEnabled(true);
+            this.userSexEdit.setEnabled(true);
+        } else {
+            this.usernameEdit.setEnabled(false);
+            this.userFirstNameEdit.setEnabled(false);
+            this.userLastnameEdit.setEnabled(false);
+            this.userSexEdit.setEnabled(false);
+        }
     }//GEN-LAST:event_unlockFieldsActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -1441,6 +1498,60 @@ public class AdminVist extends javax.swing.JFrame {
     private void adminLastPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLastPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_adminLastPasswordActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //code of the add user
+        String nameUser = this.username.getText();
+        String userLastName1 = this.firstName.getText();
+        String userLastName2 = this.LastName.getText();
+        int userAge = (Integer) this.age.getValue();
+        double userCurrentWeigth = 0.0;
+        try {
+            userCurrentWeigth = Double.parseDouble(this.userWeigth.getText());
+        } catch (Error e) {
+            JOptionPane.showMessageDialog(null, "El tipo de dato introducido no es correcto, ese debe de ser como : X.X");
+        }
+        double userCurrentHeigth = 0.0;
+        try {
+            userCurrentHeigth = Double.parseDouble(this.userWeigth.getText());
+        } catch (Error e) {
+            JOptionPane.showMessageDialog(null, "El tipo de dato introducido no es correcto, ese debe de ser como : X.X");
+        }
+        String telephoneUser = this.userPhone.getText();
+        int indexSelect = this.sex.getSelectedIndex();
+        char userSex = '0';
+        if (indexSelect == 0) {
+            userSex = 'H';
+        } else {
+            userSex = 'M';
+        }
+        //estos comandos proporcionan la obtencion de la fecha para enviar a mysql dato Date 
+        Date preDate = userDate.getDate();
+        long dateInLong = preDate.getTime();
+        java.sql.Date date = new java.sql.Date(dateInLong);
+        JOptionPane.showMessageDialog(null, date);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void editPBStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editPBStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editPBStateChanged
+
+    private void confirmDialogEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDialogEditActionPerformed
+        // TODO add your handling code here:
+        if(this.confirmDialogEdit.isSelected()){
+            this.editPB.setEnabled(true);
+        }
+        else
+            this.editPB.setEnabled(false);
+    }//GEN-LAST:event_confirmDialogEditActionPerformed
+
+    private void confirmPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPBActionPerformed
+        // TODO add your handling code here:
+        String userDeleteId = this.deleteUserID.getText();
+    }//GEN-LAST:event_confirmPBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1498,6 +1609,7 @@ public class AdminVist extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateCiteModify;
     private javax.swing.JButton deleteCitePB;
     private javax.swing.JButton deleteMedicPB;
+    private javax.swing.JTextField deleteUserID;
     private javax.swing.JButton editMedicPB;
     private javax.swing.JButton editPB;
     private javax.swing.JTextField firstName;
@@ -1614,7 +1726,6 @@ public class AdminVist extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser userDate;
     private javax.swing.JTextField userFirstNameEdit;
     private javax.swing.JTextField userHeigth;
-    private javax.swing.JTextField userID;
     private javax.swing.JTextField userIdCite;
     private javax.swing.JTextField userIdEdit;
     private javax.swing.JTextField userLastnameEdit;
