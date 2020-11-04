@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package AppInterface;
+import Models.Cites;
+import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +17,10 @@ public class MedicVist extends javax.swing.JFrame {
     /**
      * Creates new form MedicVist
      */
+    //methods public 
+    public void setPassword(String password){
+        this.password = password;
+    }
     public MedicVist() {
         initComponents();
     }
@@ -41,13 +48,14 @@ public class MedicVist extends javax.swing.JFrame {
         getHistoryMedical = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        AtentionPane = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         numberOfCite = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
+        confirmAtention = new javax.swing.JCheckBox();
+        startCitePB = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -181,11 +189,11 @@ public class MedicVist extends javax.swing.JFrame {
         jTabbedPane1.addTab("Historial Medico", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new java.awt.GridLayout());
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
-        jTabbedPane2.setBackground(new java.awt.Color(51, 51, 51));
-        jTabbedPane2.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        AtentionPane.setBackground(new java.awt.Color(51, 51, 51));
+        AtentionPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        AtentionPane.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -194,10 +202,26 @@ public class MedicVist extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setText("Número ficha cita");
 
-        jCheckBox1.setText("La cita en cuestión es atendida y llevada a cabo con el paciente en presencia física");
+        numberOfCite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", " " }));
 
-        jButton2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jButton2.setText("Atender cita");
+        confirmAtention.setText("La cita en cuestión es atendida y llevada a cabo con el paciente en presencia física");
+        confirmAtention.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmAtentionActionPerformed(evt);
+            }
+        });
+
+        startCitePB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        startCitePB.setText("Atender cita");
+        startCitePB.setEnabled(false);
+        startCitePB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startCitePBActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
+        jLabel16.setToolTipText("<html>\n<b>Nota: </b>Una vez comenzada la cita, no podra atender<br/>\nmas citas aparte de la actual\n</html>");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -206,38 +230,46 @@ public class MedicVist extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(261, 261, 261)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
+                            .addComponent(confirmAtention)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(numberOfCite, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(256, 256, 256)
-                        .addComponent(jButton2)))
+                        .addComponent(startCitePB)))
                 .addContainerGap(139, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(261, 261, 261)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addGap(38, 38, 38))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel5)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel16)))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(numberOfCite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
+                .addComponent(confirmAtention)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(startCitePB)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Comenzar Cita", jPanel5);
+        AtentionPane.addTab("Comenzar Cita", jPanel5);
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -257,6 +289,11 @@ public class MedicVist extends javax.swing.JFrame {
         finishConsultPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         finishConsultPB.setForeground(new java.awt.Color(255, 255, 255));
         finishConsultPB.setText("Finalizar Cita");
+        finishConsultPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finishConsultPBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -297,14 +334,14 @@ public class MedicVist extends javax.swing.JFrame {
                 .addContainerGap(96, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Finalizar Cita", jPanel6);
+        AtentionPane.addTab("Finalizar Cita", jPanel6);
 
-        jPanel3.add(jTabbedPane2);
+        jPanel3.add(AtentionPane);
 
         jTabbedPane1.addTab("Atender cita", jPanel3);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new java.awt.GridLayout());
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
         jTabbedPane3.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jTabbedPane3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -331,6 +368,11 @@ public class MedicVist extends javax.swing.JFrame {
 
         changePasswordPB.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         changePasswordPB.setText("Cambiar contraseña");
+        changePasswordPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePasswordPBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -447,6 +489,62 @@ public class MedicVist extends javax.swing.JFrame {
     private void logOutPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutPBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_logOutPBActionPerformed
+    //caja de selección de atención de la cita
+    private void confirmAtentionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAtentionActionPerformed
+        // TODO add your handling code here:
+        if(this.confirmAtention.isSelected())
+            this.startCitePB.setEnabled(true);
+        else
+            this.startCitePB.setEnabled(false);
+    }//GEN-LAST:event_confirmAtentionActionPerformed
+    //boton de atención de la cita
+    private void startCitePBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startCitePBActionPerformed
+        // TODO add your handling code here:
+        int index = this.numberOfCite.getSelectedIndex();
+        int numberCite = Integer.parseInt(this.numberOfCite.getItemAt(index));
+        System.out.println(numberCite);
+        //acciones le la aplicación
+        this.AtentionPane.setSelectedIndex(1);
+        this.confirmAtention.setEnabled(false);
+        this.startCitePB.setEnabled(false);
+        this.cite.setId(numberCite);
+    }//GEN-LAST:event_startCitePBActionPerformed
+    //boton de finalización de la cita
+    private void finishConsultPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishConsultPBActionPerformed
+        // TODO add your handling code here:
+        String reason = this.consultMotif.getText();
+        String treatmentPacient = this.consultTreatment.getText();
+        int validator = reason.length() + treatmentPacient.length();
+        if(validator >= 2 && validator <= 510){
+            this.confirmAtention.setEnabled(true);
+            this.confirmAtention.setSelected(false);
+            this.startCitePB.setEnabled(true);
+            this.cite.setReason(reason);
+            this.cite.setTreatment(treatmentPacient);
+            this.cite.setAttention(true);
+            //acciones de la base de datos inicio
+            // fin acciones de la base de datos
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Longitud de datos máxima alcanzada");
+    }//GEN-LAST:event_finishConsultPBActionPerformed
+    //boton de cambio de contraseña
+    private void changePasswordPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordPBActionPerformed
+        // TODO add your handling code here:
+        String currentPassword = this.medicLastPassword.getText();
+        if(currentPassword.equals(password)){
+            String newPassword = this.medicNewPassword.getText();
+            String confirmPassword = this.ConfirmMedicPassword.getText();
+            int validate = newPassword.length() + confirmPassword.length();
+            if(validate >= 8 && confirmPassword.equals(newPassword)){
+                
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Las contraseñas son diferentes");
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Contraseña actual incorrecta");
+    }//GEN-LAST:event_changePasswordPBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,17 +580,20 @@ public class MedicVist extends javax.swing.JFrame {
             }
         });
     }
-
+    //propieties
+    Cites cite = new Cites();
+    Vector<Integer> citesAtention = new Vector<Integer>();//vector de citas a atender
+    String password;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane AtentionPane;
     private javax.swing.JPasswordField ConfirmMedicPassword;
     private javax.swing.JButton changePasswordPB;
+    private javax.swing.JCheckBox confirmAtention;
     private javax.swing.JTextField consultMotif;
     private javax.swing.JTextField consultTreatment;
     private javax.swing.JButton finishConsultPB;
     private javax.swing.JButton getHistoryMedical;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -500,6 +601,7 @@ public class MedicVist extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -519,7 +621,6 @@ public class MedicVist extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
@@ -527,5 +628,6 @@ public class MedicVist extends javax.swing.JFrame {
     private javax.swing.JPasswordField medicLastPassword;
     private javax.swing.JPasswordField medicNewPassword;
     private javax.swing.JComboBox<String> numberOfCite;
+    private javax.swing.JButton startCitePB;
     // End of variables declaration//GEN-END:variables
 }

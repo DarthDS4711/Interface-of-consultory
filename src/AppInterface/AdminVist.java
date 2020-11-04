@@ -21,6 +21,8 @@ public class AdminVist extends javax.swing.JFrame {
     public AdminVist() {
         initComponents();
     }
+    //methods public
+    public void setPassword(String password){this.password = password;}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,15 +99,15 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        lastNameMedic2 = new javax.swing.JTextField();
+        medicName = new javax.swing.JTextField();
+        lastNameMedic1 = new javax.swing.JTextField();
+        medicTelephone = new javax.swing.JTextField();
+        medicPassword = new javax.swing.JPasswordField();
+        medicEspeciality = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        profecionalID = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
@@ -113,16 +115,16 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
         medicLastnameEdit = new javax.swing.JTextField();
-        nameMedicEdit1 = new javax.swing.JTextField();
+        medicIdEdit = new javax.swing.JTextField();
         medicFirstnameEdit = new javax.swing.JTextField();
-        medicConfirmPassword = new javax.swing.JPasswordField();
-        medicNewPassword = new javax.swing.JPasswordField();
         unlockMedicFields = new javax.swing.JCheckBox();
         confirmDialogMedic = new javax.swing.JCheckBox();
         editMedicPB = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
+        medicTelephoneEdit = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        nameMedicEdit1 = new javax.swing.JTextField();
         jPanel11 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -177,6 +179,8 @@ public class AdminVist extends javax.swing.JFrame {
         changeAdminPasswordPB = new javax.swing.JButton();
         jLabel59 = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
+        jLabel64 = new javax.swing.JLabel();
+        logOutPB = new javax.swing.JButton();
 
         jLabel26.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel26.setText("Especialidad");
@@ -682,33 +686,38 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel27.setText("Contraseña");
 
-        jTextField1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lastNameMedic2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        medicName.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        lastNameMedic1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lastNameMedic1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                lastNameMedic1ActionPerformed(evt);
             }
         });
 
-        jTextField4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        medicTelephone.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
-        jPasswordField1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        medicPassword.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Médico General", "Pediatra", "Oftamologa", "Oncología Medica", " " }));
+        medicEspeciality.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Médico General", "Pediatra", "Oftamologa", "Oncología Medica", " " }));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-add-32 (1).png"))); // NOI18N
         jButton2.setText("Agregar Médico");
         jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel28.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel28.setText("Cedula Profesional");
 
-        jTextField5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        profecionalID.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel31.setToolTipText("Sección del menú para registrar un médico");
@@ -725,31 +734,31 @@ public class AdminVist extends javax.swing.JFrame {
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel28)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5))
+                                .addComponent(profecionalID))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel20)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2))
+                                .addComponent(medicName))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel22)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField3))
+                                .addComponent(lastNameMedic1))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel23)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1))
+                                .addComponent(lastNameMedic2))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(medicEspeciality, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPasswordField1))
+                                .addComponent(medicPassword))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(medicTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(271, 271, 271)
                         .addComponent(jButton2)))
@@ -774,31 +783,31 @@ public class AdminVist extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(profecionalID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(medicName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lastNameMedic1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lastNameMedic2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(medicTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(medicEspeciality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(medicPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -811,10 +820,10 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-edit-user-96.png"))); // NOI18N
 
         jLabel33.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel33.setText("Nueva contraseña");
+        jLabel33.setText("Teléfono");
 
         jLabel34.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel34.setText("Nombre");
+        jLabel34.setText("Identificador");
 
         jLabel35.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel35.setText("Apellido Paterno");
@@ -822,21 +831,13 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel36.setText("Apellido Materno");
 
-        jLabel37.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel37.setText("Confirmar contraseña");
-
         medicLastnameEdit.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         medicLastnameEdit.setEnabled(false);
 
-        nameMedicEdit1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        nameMedicEdit1.setEnabled(false);
+        medicIdEdit.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         medicFirstnameEdit.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         medicFirstnameEdit.setEnabled(false);
-
-        medicConfirmPassword.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
-        medicNewPassword.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         unlockMedicFields.setText("Modificar campos bloqueados");
         unlockMedicFields.addActionListener(new java.awt.event.ActionListener() {
@@ -846,13 +847,31 @@ public class AdminVist extends javax.swing.JFrame {
         });
 
         confirmDialogMedic.setText("Actuo bajo el consentimiento del medico para cambiar sus datos");
+        confirmDialogMedic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDialogMedicActionPerformed(evt);
+            }
+        });
 
         editMedicPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         editMedicPB.setText("Editar Médico");
         editMedicPB.setEnabled(false);
+        editMedicPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMedicPBActionPerformed(evt);
+            }
+        });
 
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel38.setToolTipText("<html>\n<p>\nSección del menú que modifica un médico existente\n<strong>Nota:</strong>Los campos bloqueados son información<br/>\nque se puede modificar pero no es común o necesita previa sutorización<br/>\nsi obtuvo autorización marque la casilla <b>\"Modificar campos bloqueados\"</b>\n</p>\n</html>\n");
+
+        medicTelephoneEdit.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+
+        jLabel37.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel37.setText("Nombre");
+
+        nameMedicEdit1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        nameMedicEdit1.setEnabled(false);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -861,7 +880,7 @@ public class AdminVist extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
+                        .addGap(184, 184, 184)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel34)
                             .addComponent(jLabel33)
@@ -870,16 +889,14 @@ public class AdminVist extends javax.swing.JFrame {
                             .addComponent(jLabel37))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(medicLastnameEdit)
-                            .addComponent(nameMedicEdit1)
+                            .addComponent(medicLastnameEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(medicIdEdit)
                             .addComponent(medicFirstnameEdit)
-                            .addComponent(medicConfirmPassword)
-                            .addComponent(medicNewPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)))
+                            .addComponent(medicTelephoneEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(nameMedicEdit1)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(unlockMedicFields)
-                        .addGap(163, 163, 163)
-                        .addComponent(editMedicPB))
+                        .addComponent(unlockMedicFields))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(confirmDialogMedic)))
@@ -890,6 +907,10 @@ public class AdminVist extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addComponent(jLabel38)
                 .addGap(98, 98, 98))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(editMedicPB)
+                .addGap(248, 248, 248))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -901,33 +922,30 @@ public class AdminVist extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
+                    .addComponent(medicIdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel37)
                     .addComponent(nameMedicEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
                     .addComponent(medicFirstnameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
                     .addComponent(medicLastnameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(medicNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(medicTelephoneEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel37)
-                    .addComponent(medicConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(unlockMedicFields))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(editMedicPB)))
+                .addComponent(editMedicPB)
+                .addGap(25, 25, 25)
+                .addComponent(unlockMedicFields)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(confirmDialogMedic)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Modificar", jPanel10);
@@ -1140,6 +1158,15 @@ public class AdminVist extends javax.swing.JFrame {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(citeModifyPB)
+                        .addGap(297, 297, 297))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(jLabel53)
+                        .addGap(26, 26, 26))))
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -1155,20 +1182,10 @@ public class AdminVist extends javax.swing.JFrame {
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(citeIdModify, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                             .addComponent(dateCiteModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(citeIdMedicEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(190, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addComponent(citeModifyPB)
-                        .addGap(297, 297, 297))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel53)
-                        .addGap(26, 26, 26))))
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(confirmDialogModifyCite)
+                            .addComponent(citeIdMedicEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(confirmDialogModifyCite)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
@@ -1355,6 +1372,11 @@ public class AdminVist extends javax.swing.JFrame {
 
         changeAdminPasswordPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         changeAdminPasswordPB.setText("Cambiar contraseña");
+        changeAdminPasswordPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeAdminPasswordPBActionPerformed(evt);
+            }
+        });
 
         jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel59.setToolTipText("<html>\n<p>\nPara cambiar tu contraseña deberás proporionar la<br/>\n<b>contraseña anterior</b>, ademas de ingresar y confirmar<br/>\nla nueva contraseña\n</p>\n</html>");
@@ -1412,15 +1434,40 @@ public class AdminVist extends javax.swing.JFrame {
 
         jTabbedPane6.addTab("Cambiar contraseña", jPanel17);
 
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel64.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/log-out_icon-256.png"))); // NOI18N
+
+        logOutPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        logOutPB.setText("Cerrar Sesión");
+        logOutPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutPBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(jLabel64))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(logOutPB)))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 429, Short.MAX_VALUE)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel64)
+                .addGap(18, 18, 18)
+                .addComponent(logOutPB)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         jTabbedPane6.addTab("Cerrar sesión", jPanel18);
@@ -1500,20 +1547,39 @@ public class AdminVist extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_unlockFieldsActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void lastNameMedic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameMedic1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
+    }//GEN-LAST:event_lastNameMedic1ActionPerformed
+    //caja seleccionable para eliminar un médico
     private void confirmDeleteMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteMedicActionPerformed
         // TODO add your handling code here:
+        if(this.confirmDeleteMedic.isSelected())
+            this.deleteMedicPB.setEnabled(true);
+        else
+            this.deleteMedicPB.setEnabled(false);
     }//GEN-LAST:event_confirmDeleteMedicActionPerformed
-
+    //boton para la eliminación de un médico
     private void deleteMedicPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMedicPBActionPerformed
         // TODO add your handling code here:
+        String medicId = this.medicIdToDelete.getText();
+        if(medicId.length() >= 7 && medicId.length() <= 8){
+            
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Ingresa correctamente la credencial del médico");
     }//GEN-LAST:event_deleteMedicPBActionPerformed
-
+    //caja seleccionable para desbloquear campos de edición del médico
     private void unlockMedicFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unlockMedicFieldsActionPerformed
         // TODO add your handling code here:
+        if (this.unlockMedicFields.isSelected()) {
+            this.medicIdEdit.setEnabled(true);
+            this.medicFirstnameEdit.setEnabled(true);
+            this.medicLastnameEdit.setEnabled(true);
+        } else {
+            this.medicIdEdit.setEnabled(false);
+            this.medicFirstnameEdit.setEnabled(false);
+            this.medicLastnameEdit.setEnabled(false);
+        }
     }//GEN-LAST:event_unlockMedicFieldsActionPerformed
 
     private void citeIdModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citeIdModifyActionPerformed
@@ -1585,8 +1651,7 @@ public class AdminVist extends javax.swing.JFrame {
             int indexCurrent = this.selectMedic.getSelectedIndex();
             String medicID = this.selectMedic.getItemAt(indexCurrent);
             String citeDate = ((JTextField) this.dateCite.getDateEditor().getUiComponent()).getText();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Introduzca correctamente el identificador del usuario");
         }
     }//GEN-LAST:event_addCitePBActionPerformed
@@ -1594,42 +1659,114 @@ public class AdminVist extends javax.swing.JFrame {
     private void citeModifyPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citeModifyPBActionPerformed
         // TODO add your handling code here:
         String idCite = this.citeIdModify.getText();
-        if(idCite.length() > 0){
+        if (idCite.length() > 0) {
             int currentIndex = this.citeIdMedicEdit.getSelectedIndex();
             String medicId = this.citeIdMedicEdit.getItemAt(currentIndex);
             String citeDate = ((JTextField) this.dateCiteModify.getDateEditor().getUiComponent()).getText();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Introduzca correctamente el número de cita");
         }
     }//GEN-LAST:event_citeModifyPBActionPerformed
     //caja seleccionable de confirmación de la modificación de la cita
     private void confirmDialogModifyCiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDialogModifyCiteActionPerformed
         // TODO add your handling code here
-        if(this.confirmDialogModifyCite.isSelected())
+        if (this.confirmDialogModifyCite.isSelected()) {
             this.citeModifyPB.setEnabled(true);
-        else
+        } else {
             this.citeModifyPB.setEnabled(false);
+        }
     }//GEN-LAST:event_confirmDialogModifyCiteActionPerformed
     //boton de eliminación de una cita
     private void deleteCitePBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCitePBActionPerformed
         // TODO add your handling code here:
         String citeId = this.citeIdToDelete.getText();
-        if(citeId.length() > 0){
+        if (citeId.length() > 0) {
             //acciones hacia la base de datos
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Introduzca correctamente el número de cita");
         }
     }//GEN-LAST:event_deleteCitePBActionPerformed
     //caja seleccionable para confirmar la eliminación de una cita
     private void confirmDialogToDeleteCiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDialogToDeleteCiteActionPerformed
         // TODO add your handling code here:
-        if(this.confirmDialogToDeleteCite.isSelected())
+        if (this.confirmDialogToDeleteCite.isSelected()) {
             this.deleteCitePB.setEnabled(true);
-        else
+        } else {
             this.deleteCitePB.setEnabled(false);
+        }
     }//GEN-LAST:event_confirmDialogToDeleteCiteActionPerformed
+    //boton de registrar médico
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String id = this.profecionalID.getText();
+        String nameMedic = this.medicName.getText();
+        String lastName1 = this.lastNameMedic1.getText();
+        String lastName2 = this.lastNameMedic2.getText();
+        String telephone = this.medicTelephone.getText();
+        int currentIndex = this.medicEspeciality.getSelectedIndex();
+        String especiality = this.medicEspeciality.getItemAt(currentIndex);
+        String passwordMedic = this.medicPassword.getText();
+        if (id.length() <= 8 && id.length() >= 7) {
+            int validateInfo = id.length() + nameMedic.length() + lastName1.length() + lastName2.length();
+            validateInfo = validateInfo + telephone.length() + passwordMedic.length();
+            if (validateInfo >= 24) {
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Introduzca correctamente los datos");
+            }
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+    //boton de moo¿dificación de un médico
+    private void editMedicPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMedicPBActionPerformed
+        // TODO add your handling code here:
+        String medicID = this.medicIdEdit.getText();
+        String name;
+        String lastName1;
+        String lastName2;
+        String telephone = this.medicTelephoneEdit.getText();
+        int validate = medicID.length() + telephone.length();
+        if (validate <= 18 && validate >= 17) {
+            if (this.unlockMedicFields.isSelected()) {
+                name = this.nameMedicEdit1.getText();
+                lastName1 = this.medicFirstnameEdit.getText();
+                lastName2 = this.medicLastnameEdit.getText();
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Introduzca correctamente los campos identificador y telefono");
+    }//GEN-LAST:event_editMedicPBActionPerformed
+    //caja seleccionable para permitir la modificación  de los datos del médico
+    private void confirmDialogMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDialogMedicActionPerformed
+        // TODO add your handling code here:
+        if (this.confirmDialogMedic.isSelected()) {
+            this.editMedicPB.setEnabled(true);
+        } else {
+            this.editMedicPB.setEnabled(false);
+        }
+    }//GEN-LAST:event_confirmDialogMedicActionPerformed
+    //boton de modificación de la contraseña de administrador
+    private void changeAdminPasswordPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeAdminPasswordPBActionPerformed
+        // TODO add your handling code here:
+        String currentPassword = this.adminLastPassword.getText();
+        String newPassword = this.adminNewPassword.getText();
+        String confirmPassword = this.adminConfirmThePassword.getText();
+        if(currentPassword.equals(this.password)){
+            int validate = newPassword.length() + confirmPassword.length();
+            if(validate >= 8 && newPassword.equals(confirmPassword)){
+                
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Contraseñas no iguales o inválidas");
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Contraseña actual no válida");
+        
+    }//GEN-LAST:event_changeAdminPasswordPBActionPerformed
+    //boton para cerrar sesión
+    private void logOutPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutPBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logOutPBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1665,7 +1802,8 @@ public class AdminVist extends javax.swing.JFrame {
             }
         });
     }
-
+    //propieties of system
+    private String password;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField LastName;
     private javax.swing.JButton addCitePB;
@@ -1695,7 +1833,6 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1756,6 +1893,7 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1776,7 +1914,6 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -1785,17 +1922,20 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JPasswordField medicConfirmPassword;
+    private javax.swing.JTextField lastNameMedic1;
+    private javax.swing.JTextField lastNameMedic2;
+    private javax.swing.JButton logOutPB;
+    private javax.swing.JComboBox<String> medicEspeciality;
     private javax.swing.JTextField medicFirstnameEdit;
+    private javax.swing.JTextField medicIdEdit;
     private javax.swing.JTextField medicIdToDelete;
     private javax.swing.JTextField medicLastnameEdit;
-    private javax.swing.JPasswordField medicNewPassword;
+    private javax.swing.JTextField medicName;
+    private javax.swing.JPasswordField medicPassword;
+    private javax.swing.JTextField medicTelephone;
+    private javax.swing.JTextField medicTelephoneEdit;
     private javax.swing.JTextField nameMedicEdit1;
+    private javax.swing.JTextField profecionalID;
     private javax.swing.JCheckBox responsability;
     private javax.swing.JComboBox<String> selectMedic;
     private javax.swing.JComboBox<String> sex;
