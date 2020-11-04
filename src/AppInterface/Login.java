@@ -5,6 +5,9 @@
  */
 package AppInterface;
 
+import javax.swing.JOptionPane;
+import Program.Server;
+
 /**
  *
  * @author Shadowkiller
@@ -66,6 +69,11 @@ public class Login extends javax.swing.JFrame {
 
         loginPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         loginPB.setText("Login");
+        loginPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginPBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,6 +137,18 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPBActionPerformed
+        // TODO add your handling code here:
+        String usernameIn = this.username.getText();
+        String userPassword = this.password.getText();
+        if(usernameIn.length() > 0 && userPassword.length() > 0){
+            //acciones con la base de datos
+        }
+        else{
+           JOptionPane.showMessageDialog(null, "Introduzca correctamente sus credenciales");
+        }
+    }//GEN-LAST:event_loginPBActionPerformed
 
     /**
      * @param args the command line arguments

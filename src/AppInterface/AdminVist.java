@@ -7,6 +7,7 @@ package AppInterface;
 
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -135,22 +136,22 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel42 = new javax.swing.JLabel();
         userIdCite = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
-        medicIdCite = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
         dateCite = new com.toedter.calendar.JDateChooser();
         addCitePB = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
+        selectMedic = new javax.swing.JComboBox<>();
         jPanel13 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
-        medicIdModify = new javax.swing.JTextField();
         jLabel47 = new javax.swing.JLabel();
-        citeIdModify1 = new javax.swing.JTextField();
+        citeIdModify = new javax.swing.JTextField();
         jLabel48 = new javax.swing.JLabel();
         dateCiteModify = new com.toedter.calendar.JDateChooser();
         citeModifyPB = new javax.swing.JButton();
         confirmDialogModifyCite = new javax.swing.JCheckBox();
         jLabel53 = new javax.swing.JLabel();
+        citeIdMedicEdit = new javax.swing.JComboBox<>();
         jPanel14 = new javax.swing.JPanel();
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
@@ -1021,17 +1022,21 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel43.setText("Cédula del médico");
 
-        medicIdCite.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
         jLabel44.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel44.setText("Fecha consulta");
+
+        dateCite.setDateFormatString("YYYY-MM-DD HH:MM:SS");
 
         addCitePB.setBackground(java.awt.Color.darkGray);
         addCitePB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         addCitePB.setForeground(new java.awt.Color(255, 255, 255));
         addCitePB.setText("Agregar Cita");
         addCitePB.setBorder(null);
-        addCitePB.setEnabled(false);
+        addCitePB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCitePBActionPerformed(evt);
+            }
+        });
 
         jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel52.setToolTipText("<html>\n<p>\nEn esta sección nos permitirá registrar nuevas citas con un médico<br/>\nun paiente y dia acordados\n</p>\n</html>");
@@ -1040,10 +1045,6 @@ public class AdminVist extends javax.swing.JFrame {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(addCitePB, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(266, 266, 266))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel52)
@@ -1059,12 +1060,16 @@ public class AdminVist extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(userIdCite)
-                            .addComponent(medicIdCite, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                            .addComponent(dateCite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(dateCite, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(selectMedic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(302, 302, 302)
                         .addComponent(jLabel41)))
                 .addContainerGap(152, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(addCitePB, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(266, 266, 266))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1080,14 +1085,14 @@ public class AdminVist extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
-                    .addComponent(medicIdCite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectMedic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel44)
                     .addComponent(dateCite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(addCitePB, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Registrar", jPanel12);
@@ -1099,15 +1104,13 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel46.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel46.setText("Número Cita");
 
-        medicIdModify.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-
         jLabel47.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel47.setText("Cédula Médico");
 
-        citeIdModify1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        citeIdModify1.addActionListener(new java.awt.event.ActionListener() {
+        citeIdModify.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        citeIdModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                citeIdModify1ActionPerformed(evt);
+                citeIdModifyActionPerformed(evt);
             }
         });
 
@@ -1117,8 +1120,18 @@ public class AdminVist extends javax.swing.JFrame {
         citeModifyPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         citeModifyPB.setText("Modificar Cita");
         citeModifyPB.setEnabled(false);
+        citeModifyPB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                citeModifyPBActionPerformed(evt);
+            }
+        });
 
         confirmDialogModifyCite.setText("He notificado al paciente y al médico sobre el cambio en la cita");
+        confirmDialogModifyCite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDialogModifyCiteActionPerformed(evt);
+            }
+        });
 
         jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel53.setToolTipText("<html>\n<p>\nEn esta sección del menú modificarás una cita existente, para ello<br/>\nIngresarás el número de cita, el identificador del medico (si es que cambio)<br/>\ny en caso de que haya cambiado la fecha de atencion indicada\n</p>\n</html>");
@@ -1140,12 +1153,9 @@ public class AdminVist extends javax.swing.JFrame {
                             .addComponent(jLabel48))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(medicIdModify)
-                            .addComponent(citeIdModify1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                            .addComponent(dateCiteModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(confirmDialogModifyCite)))
+                            .addComponent(citeIdModify, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(dateCiteModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(citeIdMedicEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(190, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -1156,6 +1166,10 @@ public class AdminVist extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addComponent(jLabel53)
                         .addGap(26, 26, 26))))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(confirmDialogModifyCite)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1167,11 +1181,11 @@ public class AdminVist extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel46)
-                    .addComponent(citeIdModify1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(citeIdModify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
-                    .addComponent(medicIdModify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(citeIdMedicEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel48)
@@ -1180,7 +1194,7 @@ public class AdminVist extends javax.swing.JFrame {
                 .addComponent(citeModifyPB)
                 .addGap(33, 33, 33)
                 .addComponent(confirmDialogModifyCite)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Modificar ", jPanel13);
@@ -1196,11 +1210,21 @@ public class AdminVist extends javax.swing.JFrame {
 
         confirmDialogToDeleteCite.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         confirmDialogToDeleteCite.setText("He notificado al paciente y el médico los motivos de cancelación de la cita");
+        confirmDialogToDeleteCite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmDialogToDeleteCiteActionPerformed(evt);
+            }
+        });
 
         deleteCitePB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         deleteCitePB.setText("Eliminar Cita");
         deleteCitePB.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         deleteCitePB.setEnabled(false);
+        deleteCitePB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteCitePBActionPerformed(evt);
+            }
+        });
 
         jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel51.setToolTipText("<html>\n<p>\nEsta sección del menú elimina una cita previamente registrada<br/>\n<b>Nota:</b>Para eliminar la cita debe marcar la casilla corresponiente\n</p>\n</html>");
@@ -1430,16 +1454,16 @@ public class AdminVist extends javax.swing.JFrame {
     private void userWeigthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userWeigthActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userWeigthActionPerformed
-
+    //caja seleccionable de acto responsivo de eliminación de usuario
     private void responsabilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_responsabilityActionPerformed
         // TODO add your handling code here:
-        if(this.responsability.isSelected()){
+        if (this.responsability.isSelected()) {
             this.confirmPB.setEnabled(true);
-        }
-        else
+        } else {
             this.confirmPB.setEnabled(false);
+        }
     }//GEN-LAST:event_responsabilityActionPerformed
-
+    //boton de confirmación de modificación de un usuario
     private void editPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPBActionPerformed
         // TODO add your handling code here:
         String IDuser = this.deleteUserID.getText();
@@ -1448,18 +1472,19 @@ public class AdminVist extends javax.swing.JFrame {
         String lastName2;
         String telephone = this.userTelephoneEdit.getText();
         char sexUser = '0';
-        if(this.unlockFields.isSelected()){
+        if (this.unlockFields.isSelected()) {
             name = this.usernameEdit.getText();
             lastName1 = this.userFirstNameEdit.getText();
             lastName2 = this.userLastnameEdit.getText();
             int indexCurrent = this.userSexEdit.getSelectedIndex();
-            if(indexCurrent == 0)
+            if (indexCurrent == 0) {
                 sexUser = 'H';
-            else
+            } else {
                 sexUser = 'M';
+            }
         }
     }//GEN-LAST:event_editPBActionPerformed
-
+    //caja seleccionable para desbloqueo de campos especiales (modificar usuario)
     private void unlockFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unlockFieldsActionPerformed
         // TODO add your handling code here:
         if (this.unlockFields.isSelected()) {
@@ -1491,14 +1516,14 @@ public class AdminVist extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_unlockMedicFieldsActionPerformed
 
-    private void citeIdModify1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citeIdModify1ActionPerformed
+    private void citeIdModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citeIdModifyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_citeIdModify1ActionPerformed
+    }//GEN-LAST:event_citeIdModifyActionPerformed
 
     private void adminLastPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLastPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_adminLastPasswordActionPerformed
-
+    //boton de registro de un usuario
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //code of the add user
@@ -1538,20 +1563,73 @@ public class AdminVist extends javax.swing.JFrame {
     private void editPBStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editPBStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_editPBStateChanged
-
+    //caja seleccionable de confirmación  de modificación del usuario
     private void confirmDialogEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDialogEditActionPerformed
         // TODO add your handling code here:
-        if(this.confirmDialogEdit.isSelected()){
+        if (this.confirmDialogEdit.isSelected()) {
             this.editPB.setEnabled(true);
-        }
-        else
+        } else {
             this.editPB.setEnabled(false);
+        }
     }//GEN-LAST:event_confirmDialogEditActionPerformed
-
+    //boton de confirmación de una eliminación de usuario
     private void confirmPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPBActionPerformed
         // TODO add your handling code here:
         String userDeleteId = this.deleteUserID.getText();
     }//GEN-LAST:event_confirmPBActionPerformed
+    //boton de confirmación del registro de una cita
+    private void addCitePBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCitePBActionPerformed
+        // TODO add your handling code here:
+        String userID = this.userIdCite.getText();
+        if (userID.length() > 0) {
+            int indexCurrent = this.selectMedic.getSelectedIndex();
+            String medicID = this.selectMedic.getItemAt(indexCurrent);
+            String citeDate = ((JTextField) this.dateCite.getDateEditor().getUiComponent()).getText();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Introduzca correctamente el identificador del usuario");
+        }
+    }//GEN-LAST:event_addCitePBActionPerformed
+    //boton de modificación de una cita
+    private void citeModifyPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citeModifyPBActionPerformed
+        // TODO add your handling code here:
+        String idCite = this.citeIdModify.getText();
+        if(idCite.length() > 0){
+            int currentIndex = this.citeIdMedicEdit.getSelectedIndex();
+            String medicId = this.citeIdMedicEdit.getItemAt(currentIndex);
+            String citeDate = ((JTextField) this.dateCiteModify.getDateEditor().getUiComponent()).getText();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Introduzca correctamente el número de cita");
+        }
+    }//GEN-LAST:event_citeModifyPBActionPerformed
+    //caja seleccionable de confirmación de la modificación de la cita
+    private void confirmDialogModifyCiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDialogModifyCiteActionPerformed
+        // TODO add your handling code here
+        if(this.confirmDialogModifyCite.isSelected())
+            this.citeModifyPB.setEnabled(true);
+        else
+            this.citeModifyPB.setEnabled(false);
+    }//GEN-LAST:event_confirmDialogModifyCiteActionPerformed
+    //boton de eliminación de una cita
+    private void deleteCitePBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCitePBActionPerformed
+        // TODO add your handling code here:
+        String citeId = this.citeIdToDelete.getText();
+        if(citeId.length() > 0){
+            //acciones hacia la base de datos
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Introduzca correctamente el número de cita");
+        }
+    }//GEN-LAST:event_deleteCitePBActionPerformed
+    //caja seleccionable para confirmar la eliminación de una cita
+    private void confirmDialogToDeleteCiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDialogToDeleteCiteActionPerformed
+        // TODO add your handling code here:
+        if(this.confirmDialogToDeleteCite.isSelected())
+            this.deleteCitePB.setEnabled(true);
+        else
+            this.deleteCitePB.setEnabled(false);
+    }//GEN-LAST:event_confirmDialogToDeleteCiteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1596,7 +1674,8 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JPasswordField adminNewPassword;
     private javax.swing.JSpinner age;
     private javax.swing.JButton changeAdminPasswordPB;
-    private javax.swing.JTextField citeIdModify1;
+    private javax.swing.JComboBox<String> citeIdMedicEdit;
+    private javax.swing.JTextField citeIdModify;
     private javax.swing.JTextField citeIdToDelete;
     private javax.swing.JButton citeModifyPB;
     private javax.swing.JCheckBox confirmDeleteMedic;
@@ -1713,13 +1792,12 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JPasswordField medicConfirmPassword;
     private javax.swing.JTextField medicFirstnameEdit;
-    private javax.swing.JTextField medicIdCite;
-    private javax.swing.JTextField medicIdModify;
     private javax.swing.JTextField medicIdToDelete;
     private javax.swing.JTextField medicLastnameEdit;
     private javax.swing.JPasswordField medicNewPassword;
     private javax.swing.JTextField nameMedicEdit1;
     private javax.swing.JCheckBox responsability;
+    private javax.swing.JComboBox<String> selectMedic;
     private javax.swing.JComboBox<String> sex;
     private javax.swing.JCheckBox unlockFields;
     private javax.swing.JCheckBox unlockMedicFields;
