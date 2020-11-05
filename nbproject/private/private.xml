@@ -5,7 +5,9 @@
         <group>
             <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/AppInterface/AdminVist.java</file>
             <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/AppInterface/MedicVist.java</file>
+            <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/Database/GestorDB.java</file>
             <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/Program/Server.java</file>
+            <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/Models/Administrator.java</file>
             <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/AppInterface/Login.java</file>
         </group>
     </open-files>

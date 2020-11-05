@@ -11,6 +11,9 @@ package Models;
  */
 public class Pacient {
     //methods
+    public Pacient(){
+        this.status = false;
+    }
     public String getId() {
         return id;
     }
@@ -88,10 +91,17 @@ public class Pacient {
     public void setFechaNac(String fechaNac) {
         this.fechaNac = fechaNac;
     }
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     //propieties
     private String id;
     private String nombre;
-
+    private boolean status;
     private String apellido1;
     private String apellido2;
     private int edad;
@@ -100,5 +110,4 @@ public class Pacient {
     private String telefono;
     private char sexo;
     private String fechaNac;
-
 }

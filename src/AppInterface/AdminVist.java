@@ -8,6 +8,7 @@ package AppInterface;
 import Models.Pacient;
 import Program.Server;
 import java.util.Date;
+import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -23,8 +24,11 @@ public class AdminVist extends javax.swing.JFrame {
     public AdminVist() {
         initComponents();
     }
+
     //methods public
-    public void setPassword(String password){this.password = password;}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,6 +95,8 @@ public class AdminVist extends javax.swing.JFrame {
         deleteUserID = new javax.swing.JTextField();
         responsability = new javax.swing.JCheckBox();
         confirmPB = new javax.swing.JButton();
+        jPanel16 = new javax.swing.JPanel();
+        showPacients = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel9 = new javax.swing.JPanel();
@@ -656,6 +662,34 @@ public class AdminVist extends javax.swing.JFrame {
         );
 
         jTabbedPane2.addTab("Eliminar ", jPanel7);
+
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
+
+        showPacients.setText("Mostrar Pacientes");
+        showPacients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPacientsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addGap(311, 311, 311)
+                .addComponent(showPacients)
+                .addContainerGap(269, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(326, Short.MAX_VALUE)
+                .addComponent(showPacients)
+                .addGap(80, 80, 80))
+        );
+
+        jTabbedPane2.addTab("Mostrar", jPanel16);
 
         jPanel2.add(jTabbedPane2);
 
@@ -1555,20 +1589,21 @@ public class AdminVist extends javax.swing.JFrame {
     //caja seleccionable para eliminar un médico
     private void confirmDeleteMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDeleteMedicActionPerformed
         // TODO add your handling code here:
-        if(this.confirmDeleteMedic.isSelected())
+        if (this.confirmDeleteMedic.isSelected()) {
             this.deleteMedicPB.setEnabled(true);
-        else
+        } else {
             this.deleteMedicPB.setEnabled(false);
+        }
     }//GEN-LAST:event_confirmDeleteMedicActionPerformed
     //boton para la eliminación de un médico
     private void deleteMedicPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMedicPBActionPerformed
         // TODO add your handling code here:
         String medicId = this.medicIdToDelete.getText();
-        if(medicId.length() >= 7 && medicId.length() <= 8){
-            
-        }
-        else
+        if (medicId.length() >= 7 && medicId.length() <= 8) {
+
+        } else {
             JOptionPane.showMessageDialog(null, "Ingresa correctamente la credencial del médico");
+        }
     }//GEN-LAST:event_deleteMedicPBActionPerformed
     //caja seleccionable para desbloquear campos de edición del médico
     private void unlockMedicFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unlockMedicFieldsActionPerformed
@@ -1602,16 +1637,18 @@ public class AdminVist extends javax.swing.JFrame {
         double userCurrentWeigth = 0.0;
         try {
             String prev = this.userWeigth.getText();
-            if(prev.length() > 0)
+            if (prev.length() > 0) {
                 userCurrentWeigth = Double.parseDouble(prev);
+            }
         } catch (Error e) {
             JOptionPane.showMessageDialog(null, "El tipo de dato introducido no es correcto, ese debe de ser como : X.X");
         }
         double userCurrentHeigth = 0.0;
         try {
             String prev = this.userWeigth.getText();
-            if(prev.length() > 0)
+            if (prev.length() > 0) {
                 userCurrentHeigth = Double.parseDouble(prev);
+            }
         } catch (Error e) {
             JOptionPane.showMessageDialog(null, "El tipo de dato introducido no es correcto, ese debe de ser como : X.X");
         }
@@ -1627,21 +1664,20 @@ public class AdminVist extends javax.swing.JFrame {
         Date preDate = userDate.getDate();
         long dateInLong = preDate.getTime();
         java.sql.Date date = new java.sql.Date(dateInLong);
-        JOptionPane.showMessageDialog(null, date);
         int validate = nameUser.length() + userLastName1.length() + userLastName2.length() + telephoneUser.length();
-        if(validate >= 13){
-            if((userCurrentWeigth >= 5.0 && userCurrentWeigth <= 400.0) && (userCurrentHeigth >= 0.2 && userCurrentHeigth <= 2.50)){
-                Pacient p = new Pacient();
-                p.setNombre(nameUser);
-                p.setApellido1(userLastName1);
-                p.setApellido2(userLastName2);
-                p.setEdad(userAge);
-                p.setPeso(userCurrentWeigth);
-                p.setEstatura(userCurrentHeigth);
-                p.setTelefono(telephoneUser);
-                p.setSexo(userSex);
-                server.addPacient(p, date);
-            }
+        if (validate >= 13) {
+            this.server = new Server();
+            this.server.openConecction();
+            Pacient p = new Pacient();
+            p.setNombre(nameUser);
+            p.setApellido1(userLastName1);
+            p.setApellido2(userLastName2);
+            p.setEdad(userAge);
+            p.setPeso(userCurrentWeigth);
+            p.setEstatura(userCurrentHeigth);
+            p.setTelefono(telephoneUser);
+            p.setSexo(userSex);
+            this.server.addPacient(p, date);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1752,9 +1788,9 @@ public class AdminVist extends javax.swing.JFrame {
                 lastName1 = this.medicFirstnameEdit.getText();
                 lastName2 = this.medicLastnameEdit.getText();
             }
-        }
-        else
+        } else {
             JOptionPane.showMessageDialog(null, "Introduzca correctamente los campos identificador y telefono");
+        }
     }//GEN-LAST:event_editMedicPBActionPerformed
     //caja seleccionable para permitir la modificación  de los datos del médico
     private void confirmDialogMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDialogMedicActionPerformed
@@ -1771,22 +1807,32 @@ public class AdminVist extends javax.swing.JFrame {
         String currentPassword = this.adminLastPassword.getText();
         String newPassword = this.adminNewPassword.getText();
         String confirmPassword = this.adminConfirmThePassword.getText();
-        if(currentPassword.equals(this.password)){
+        if (currentPassword.equals(this.password)) {
             int validate = newPassword.length() + confirmPassword.length();
-            if(validate >= 8 && newPassword.equals(confirmPassword)){
-                
-            }
-            else
+            if (validate >= 8 && newPassword.equals(confirmPassword)) {
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Contraseñas no iguales o inválidas");
-        }
-        else
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Contraseña actual no válida");
-        
+        }
+
     }//GEN-LAST:event_changeAdminPasswordPBActionPerformed
     //boton para cerrar sesión
     private void logOutPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutPBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_logOutPBActionPerformed
+    //boton para mostrar pacientes
+    private void showPacientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPacientsActionPerformed
+        // TODO add your handling code here:
+        this.server = new Server();
+        this.server.openConecction();
+        List<Pacient> pacients = this.server.getPacients();
+        for(Pacient p:pacients){
+            System.out.println(p.getId());
+        }
+    }//GEN-LAST:event_showPacientsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1824,7 +1870,7 @@ public class AdminVist extends javax.swing.JFrame {
     }
     //propieties of system
     private String password;
-    private Server server = new Server();
+    private Server server;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField LastName;
     private javax.swing.JButton addCitePB;
@@ -1925,6 +1971,7 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
@@ -1960,6 +2007,7 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JCheckBox responsability;
     private javax.swing.JComboBox<String> selectMedic;
     private javax.swing.JComboBox<String> sex;
+    private javax.swing.JButton showPacients;
     private javax.swing.JCheckBox unlockFields;
     private javax.swing.JCheckBox unlockMedicFields;
     private com.toedter.calendar.JDateChooser userDate;

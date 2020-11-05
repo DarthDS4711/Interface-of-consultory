@@ -10,6 +10,7 @@ import Models.Administrator;
 import Models.Cites;
 import Models.History;
 import Models.Pacient;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,16 +33,26 @@ public class Server {
     }
     public void openConecction(){
         //apertura de conexión a la base de datos por tipo de usuario
-        if(this.typeUser == 1){//administador
+        /*if(this.typeUser == 1){//administador
             admin = new Administrator();
             admin.openConnection();
         }
         else if(this.typeUser == 2){//medico
             medic = new Medic();
+        }*/
+        this.connection = new GestorDB();
+        this.connection.openConection();
+    }
+    public List<Pacient> getPacients(){
+        List<Pacient> pacients = this.connection.getPacients();
+        for(Pacient p:pacients){
+            System.out.println(p.getId());
         }
+        return pacients;
     }
     public void addPacient(Pacient p, java.sql.Date date){
-        admin.addPacient(p, date);
+        //nota debe de detectar el tipo de sesión y agregar
+        this.connection.addPacient(p, date);
     }
     public void changeInfoMedic(String password){
         //cambio en la contraseña del médico
