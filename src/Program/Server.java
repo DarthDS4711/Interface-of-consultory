@@ -31,10 +31,15 @@ public class Server {
     public void changeInfoAdmin(String password){
         //cambio en la información (contraseña del administrador)
     }
+    //apertura y cierre de conexión
     public void openConecction(){
         this.connection = new GestorDB();
         this.connection.openConection();
     }
+    public void closeConnection(){
+        this.connection.closeConnection();
+    }
+    //metodos de pacientes
     //obtener todos los pacientes
     public List<Pacient> getPacients(){
         List<Pacient> pacients = this.connection.getPacients();
@@ -47,7 +52,13 @@ public class Server {
     public void updatePacient(Pacient p, int type){
         this.connection.modifyPacient(p, type);
     }
-    //medicos
+    public int getIDPacient(int id){
+        return this.connection.getPacient(id);
+    }
+    public void deletePacient(int id){
+        this.connection.deletePacient(id);
+    }
+    // metodos de medicos
     public List<Medic> getMedics(){
         List<Medic> medics = this.connection.getMedics();
         return medics;
@@ -56,12 +67,28 @@ public class Server {
     public void addMedic(Medic m){
         this.connection.addMedic(m);
     }
+    public int getMedic(int id){
+        return this.connection.getMedic(id);
+    }
+    public void updateMedic(Medic m, int type){
+        this.connection.updateMedic(type, m);
+    }
+    public void deleteMedic(int id){
+        this.connection.deleteMedic(id);
+    }
+    public void addCite(Cites c){
+        this.connection.addCite(c);
+    }
+    public List<Cites> getCites(){
+        return this.connection.getCites();
+    }
     public void changeInfoMedic(String password){
         //cambio en la contraseña del médico
     }
     public void changeInfoMedic(Medic medic){
         //cambio en la información del médico
     }
+    //metodos de citas
     //propieties
     GestorDB connection;//nota dicha propiedad solamente sera usada para buscar medicos
     Administrator admin;

@@ -4,6 +4,7 @@
  */
 package Database;
 
+import Models.Cites;
 import Models.Medic;
 import Models.Pacient;
 import java.sql.Connection;
@@ -39,7 +40,7 @@ public class GestorDB {
             JOptionPane.showMessageDialog(null, "Error de conexión con mysql");
         }
     }
-
+    //pacientes
     public List<Pacient> getPacients() {
         try {
             this.instruction = conection.createStatement();
@@ -89,9 +90,65 @@ public class GestorDB {
         closeInstruction1();
     }
 
-    public void addHistoicalMedic(String data) {
+     public int getPacient(int id) {
+        this.instruction1 = null;
+        int state = 0;
+        try {
+            String sql = "SELECT id FROM paciente WHERE Status = 0 and id = ?";
+            this.instruction1 = this.conection.prepareStatement(sql);
+            this.instruction1.setInt(1, id);
+            ResultSet result = this.instruction1.executeQuery();
+            if(result.next()){
+                state = 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeInstruction1();
+        return state;
     }
-
+      public void modifyPacient(Pacient pacient, int type) {
+        this.instruction1 = null;
+        String sql_update = "UPDATE paciente SET Nombre = ?, Apellido1 = ?, Apellido2 = ?, Telefono = ? WHERE id = ?";
+        if (type == 1) {
+            sql_update = "UPDATE paciente SET Telefono = ? WHERE id = ?";
+        }
+        try {
+            if (type == 1) {
+                this.instruction1 = this.conection.prepareStatement(sql_update);
+                this.instruction1.setString(1, pacient.getTelefono());
+                this.instruction1.setInt(2, Integer.parseInt(pacient.getId()));
+                this.instruction1.executeUpdate();
+                JOptionPane.showMessageDialog(null, "paciente modificado");
+            } else {
+                this.instruction1 = this.conection.prepareStatement(sql_update);
+                this.instruction1.setString(1, pacient.getNombre());
+                this.instruction1.setString(2, pacient.getApellido1());
+                this.instruction1.setString(3, pacient.getApellido2());
+                this.instruction1.setString(4, pacient.getTelefono());
+                this.instruction1.setInt(5, Integer.parseInt(pacient.getId()));
+                this.instruction1.executeUpdate();
+                JOptionPane.showMessageDialog(null, "paciente modificado");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void deletePacient(int id){
+        this.instruction1 = null;
+        String sql_delete = "UPDATE paciente SET Status = ? WHERE id = ?";
+        try {
+            this.instruction1 = this.conection.prepareStatement(sql_delete);
+            this.instruction1.setBoolean(1, true);
+            this.instruction1.setInt(2, id);
+            this.instruction1.executeLargeUpdate();
+            JOptionPane.showMessageDialog(null, "Paciente eliminado correctamente");
+            closeInstruction1();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //medicos esta parte solo se agregan métodos de medicos
     public void addMedic(Medic medic) {
         String sql_insert = "INSERT INTO medico(ID, Nombre, Password, Telefono, Especialidad, Status) VALUES(?, ?, ?, ?, ?, ?)";
         try {
@@ -134,7 +191,103 @@ public class GestorDB {
         closeInstruction();
         return medics;
     }
-
+    public int getMedic(int id) {
+        this.instruction1 = null;
+        int state = 0;
+        try {
+            String sql = "SELECT id FROM medico WHERE Status = 0 and ID = ?";
+            this.instruction1 = this.conection.prepareStatement(sql);
+            this.instruction1.setInt(1, id);
+            ResultSet result = this.instruction1.executeQuery();
+            if(result.next()){
+                state = 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeInstruction1();
+        return state;
+    }
+    public void updateMedic(int type, Medic m){
+        this.instruction1 = null;
+        String sql_update = "UPDATE medico SET Nombre = ?, Telefono = ? WHERE id = ?";
+        if (type == 1) {
+            sql_update = "UPDATE medico SET Telefono = ? WHERE id = ?";
+        }
+        try {
+            if (type == 1) {
+                this.instruction1 = this.conection.prepareStatement(sql_update);
+                this.instruction1.setString(1, m.getTelephone());
+                this.instruction1.setInt(2, Integer.parseInt(m.getMedicId()));
+                this.instruction1.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Medico modificado");
+            } else {
+                this.instruction1 = this.conection.prepareStatement(sql_update);
+                this.instruction1.setString(1, m.getName());
+                this.instruction1.setString(2, m.getTelephone());
+                this.instruction1.setInt(3, Integer.parseInt(m.getMedicId()));
+                this.instruction1.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Medico modificado");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void deleteMedic(int id){
+        this.instruction1 = null;
+        String sql_delete = "UPDATE medico SET Status = ? WHERE ID = ?";
+        try {
+            this.instruction1 = this.conection.prepareStatement(sql_delete);
+            this.instruction1.setBoolean(1, true);
+            this.instruction1.setInt(2, id);
+            this.instruction1.executeLargeUpdate();
+            JOptionPane.showMessageDialog(null, "Medico eliminado correctamente");
+            closeInstruction1();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //metodos de citas
+    public void addCite(Cites c){
+        String sql_insert = "INSERT INTO cita(ID_Paciente, Status, ID_Medico, Fecha) VALUES(?, ?, ?, ?)";
+        try {
+            this.instruction1 = this.conection.prepareStatement(sql_insert);
+            this.instruction1.setInt(1, c.getIdPacient());
+            this.instruction1.setBoolean(2, c.isAttention());
+            this.instruction1.setInt(3, c.getIdMedic());
+            this.instruction1.setTimestamp(4, c.getDate());
+            this.instruction1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Cita agregada correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeInstruction1();
+    }
+    public List<Cites> getCites(){
+        List<Cites> list = new ArrayList<>();
+        try {
+            this.instruction = conection.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String sql = "SELECT ID, ID_Paciente, ID_Medico, Fecha FROM cita WHERE Status=0";
+        try {
+            ResultSet result = this.instruction.executeQuery(sql);
+            while (result.next()) {
+                Cites c = new Cites();
+                c.setId(result.getInt("ID"));
+                c.setIdPacient(result.getInt("ID_Paciente"));
+                c.setIdMedic(result.getInt("ID_Medico"));
+                c.setDate(result.getTimestamp("Fecha"));
+                list.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeInstruction();
+        return list;
+    }
+    //cierre de conexiones
     public void closeInstruction() {
         try {
             this.instruction.close();
@@ -150,48 +303,16 @@ public class GestorDB {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public String getPacient(int id) {
-        return "test";
-    }
-
-    public String getMedic(int id) {
-        return "test";
-    }
-
-    public String getHistoricalMedic(int idPacient) {
-        return "test";
-    }
-
-    public void modifyPacient(Pacient pacient, int type) {
-        this.instruction1 = null;
-        String sql_update = "UPDATE paciente SET Nombre = ?, Apellido1 = ?, Apellido2 = ?, Telefono = ? WHERE id = ?";
-        if (type == 1) {
-            sql_update = "UPDATE paciente SET Telefono = ? WHERE id = ?";
-        }
+    
+    public void closeConnection(){
         try {
-            if (type == 1) {
-                this.instruction1 = this.conection.prepareStatement(sql_update);
-                this.instruction1.setString(1, pacient.getTelefono());
-                this.instruction1.setInt(2, Integer.parseInt(pacient.getId()));
-                this.instruction1.executeUpdate();
-                JOptionPane.showMessageDialog(null, "paciente modificado");
-            } else {
-                this.instruction1 = this.conection.prepareStatement(sql_update);
-                this.instruction1.setString(1, pacient.getNombre());
-                this.instruction1.setString(2, pacient.getApellido1());
-                this.instruction1.setString(3, pacient.getApellido2());
-                this.instruction1.setString(4, pacient.getTelefono());
-                this.instruction1.setInt(5, Integer.parseInt(pacient.getId()));
-                this.instruction1.executeUpdate();
-                JOptionPane.showMessageDialog(null, "paciente modificado");
-            }
+            this.conection.close();
         } catch (SQLException ex) {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void modifyMedic(int id, Medic medic) {
+    public String getHistoricalMedic(int idPacient) {
+        return "test";
     }
     //propieties
     private String driver;

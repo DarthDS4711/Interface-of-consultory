@@ -5,6 +5,8 @@
  */
 package Models;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Shadowkiller
@@ -46,10 +48,19 @@ public class Cites {
     public void setIdPacient(int idPacient) {
         this.idPacient = idPacient;
     }
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
     
     //propieties
     private int id;
     private int idMedic;
     private int idPacient;
+    private java.sql.Timestamp date;
     private boolean attention;
 }

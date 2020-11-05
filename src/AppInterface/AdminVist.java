@@ -6,13 +6,19 @@
 package AppInterface;
 
 import Models.Administrator;
+import Models.Cites;
 import Models.Medic;
 import Models.Pacient;
 import Program.Server;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +29,19 @@ public class AdminVist extends javax.swing.JFrame {
     /**
      * Creates new form AdminVist
      */
+    public void addMedicsFromDataBase() {
+        deleteMedics();
+        this.server.openConecction();
+        List<Medic> medics = this.server.getMedics();
+        for (Medic m : medics) {
+            this.selectMedic.addItem(m.getMedicId());
+        }
+    }
+
+    public void deleteMedics() {
+        this.selectMedic.removeAllItems();
+    }
+
     public AdminVist() {
         initComponents();
     }
@@ -30,6 +49,26 @@ public class AdminVist extends javax.swing.JFrame {
     //methods public
     public void setUser(Administrator admin) {
         this.password = admin.getPassword();
+    }
+    //mostrar citas
+    public void printCites(){
+        this.server.openConecction();
+        List<Cites> cites= this.server.getCites();
+        this.server.closeConnection();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("ID_Paciente");
+        model.addColumn("ID_Medico");
+        model.addColumn("Fecha");
+        String data[] = new String[4];
+        for(Cites c: cites){
+            data[0] = String.valueOf(c.getId());
+            data[1] = String.valueOf(c.getIdPacient());
+            data[2] = String.valueOf(c.getIdMedic());
+            data[3] = String.valueOf(c.getDate());
+            model.addRow(data);
+        }
+        this.tableCites.setModel(model);
     }
 
     /**
@@ -173,7 +212,7 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableCites = new javax.swing.JTable();
         jLabel54 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -202,6 +241,11 @@ public class AdminVist extends javax.swing.JFrame {
         jTabbedPane1.setToolTipText("");
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1065,6 +1109,11 @@ public class AdminVist extends javax.swing.JFrame {
         jTabbedPane4.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTabbedPane4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jTabbedPane4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane4StateChanged(evt);
+            }
+        });
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1081,7 +1130,7 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel44.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel44.setText("Fecha consulta");
 
-        dateCite.setDateFormatString("YYYY-MM-DD HH:MM:SS");
+        dateCite.setDateFormatString("yyyy/MM/dd HH:mm");
 
         addCitePB.setBackground(java.awt.Color.darkGray);
         addCitePB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -1334,9 +1383,8 @@ public class AdminVist extends javax.swing.JFrame {
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTable1);
+        tableCites.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jScrollPane1.setViewportView(tableCites);
 
         jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
         jLabel54.setToolTipText("<html>\n<p>\nEsta parte del menu muestra las citas no atendidas<br/>\no de un paciente en concreto\n</p>\n</html>");
@@ -1346,6 +1394,11 @@ public class AdminVist extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Mostrar Citas");
         jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1551,6 +1604,7 @@ public class AdminVist extends javax.swing.JFrame {
     //boton de confirmación de modificación de un usuario
     private void editPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPBActionPerformed
         // TODO add your handling code here:
+        this.server.openConecction();
         Pacient p = new Pacient();
         String IDuser = this.userIdEdit.getText();
         String name;
@@ -1560,6 +1614,12 @@ public class AdminVist extends javax.swing.JFrame {
         char sexUser = '0';
         p.setId(IDuser);
         p.setTelefono(telephone);
+        int val = this.server.getIDPacient(Integer.parseInt(IDuser));
+        if (val == 0) {
+            JOptionPane.showMessageDialog(null, "Paciente no Encontrado");
+            return;
+        }
+        this.server.closeConnection();
         int validate = IDuser.length() + telephone.length();
         if (validate >= 10) {
             System.out.println("Hola");
@@ -1582,10 +1642,13 @@ public class AdminVist extends javax.swing.JFrame {
                     this.server.updatePacient(p, 2);
                 }
             }
-            System.out.print(Integer.parseInt(p.getId()));                
+            System.out.print(Integer.parseInt(p.getId()));
             this.server.openConecction();
             this.server.updatePacient(p, 1);
+        } else {
+            JOptionPane.showMessageDialog(null, "Campos erroneos");
         }
+        this.server.closeConnection();
     }//GEN-LAST:event_editPBActionPerformed
     //caja seleccionable para desbloqueo de campos especiales (modificar usuario)
     private void unlockFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unlockFieldsActionPerformed
@@ -1619,8 +1682,18 @@ public class AdminVist extends javax.swing.JFrame {
     private void deleteMedicPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMedicPBActionPerformed
         // TODO add your handling code here:
         String medicId = this.medicIdToDelete.getText();
-        if (medicId.length() >= 7 && medicId.length() <= 8) {
-
+        if (medicId.length() - 1 >= 6 && medicId.length() - 1 <= 8) {
+            int id = Integer.parseInt(medicId);
+            this.server.openConecction();
+            int validate = this.server.getMedic(id);
+            this.server.closeConnection();
+            if (validate == 0) {
+                JOptionPane.showMessageDialog(null, "medico no encontrado");
+                return;
+            }
+            this.server.openConecction();
+            this.server.deleteMedic(id);
+            this.server.closeConnection();
         } else {
             JOptionPane.showMessageDialog(null, "Ingresa correctamente la credencial del médico");
         }
@@ -1697,6 +1770,7 @@ public class AdminVist extends javax.swing.JFrame {
             p.setTelefono(telephoneUser);
             p.setSexo(userSex);
             this.server.addPacient(p, date);
+            this.server.closeConnection();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1717,17 +1791,56 @@ public class AdminVist extends javax.swing.JFrame {
     private void confirmPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPBActionPerformed
         // TODO add your handling code here:
         String userDeleteId = this.deleteUserID.getText();
+        if (userDeleteId.length() > 0) {
+            int id = Integer.parseInt(userDeleteId);
+            this.server.openConecction();
+            int state = this.server.getIDPacient(id);
+            this.server.closeConnection();
+            if (state == 0) {
+                JOptionPane.showMessageDialog(null, "paciente no encontrado");
+                return;
+            }
+            this.server.openConecction();
+            this.server.deletePacient(id);
+            this.server.closeConnection();
+        } else {
+            JOptionPane.showMessageDialog(null, "Identificador de usuario erroneo");
+        }
     }//GEN-LAST:event_confirmPBActionPerformed
     //boton de confirmación del registro de una cita
     private void addCitePBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCitePBActionPerformed
         // TODO add your handling code here:
         String userID = this.userIdCite.getText();
+        int state = -1;
         if (userID.length() > 0) {
+            this.server.openConecction();
+            state = this.server.getIDPacient(Integer.parseInt(userID));
+            this.server.closeConnection();
+        }
+        if (state == 0 || userID.length() == 0) {
+            JOptionPane.showMessageDialog(null, "Paciente no identificado");
+        } else {
+            Cites cite = new Cites();
             int indexCurrent = this.selectMedic.getSelectedIndex();
             String medicID = this.selectMedic.getItemAt(indexCurrent);
-            String citeDate = ((JTextField) this.dateCite.getDateEditor().getUiComponent()).getText();
-        } else {
-            JOptionPane.showMessageDialog(null, "Introduzca correctamente el identificador del usuario");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            String theDate = dateFormat.format(this.dateCite.getDate());
+            java.util.Date convert = null;
+            try {
+                convert = dateFormat.parse(theDate);
+            } catch (ParseException ex) {
+                Logger.getLogger(AdminVist.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (convert != null) {
+                java.sql.Timestamp date = new java.sql.Timestamp(convert.getTime());
+                JOptionPane.showMessageDialog(null, date);
+                cite.setIdPacient(Integer.parseInt(userID));
+                cite.setIdMedic(Integer.parseInt(medicID));
+                cite.setDate(date);
+                this.server.openConecction();
+                this.server.addCite(cite);
+                this.server.closeConnection();
+            }
         }
     }//GEN-LAST:event_addCitePBActionPerformed
     //boton de modificación de una cita
@@ -1792,18 +1905,18 @@ public class AdminVist extends javax.swing.JFrame {
                 m.setEspeciality(especiality);
                 m.setPassword(passwordMedic);
                 this.server.openConecction();
-                System.out.println(passwordMedic);
                 this.server.addMedic(m);
             } else {
                 JOptionPane.showMessageDialog(null, "Introduzca correctamente los datos");
             }
         }
+        this.server.closeConnection();
 
     }//GEN-LAST:event_jButton2ActionPerformed
     //boton de moo¿dificación de un médico
     private void editMedicPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMedicPBActionPerformed
         // TODO add your handling code here:
-        Pacient p = new Pacient();
+        Medic m = new Medic();
         String medicID = this.medicIdEdit.getText();
         String name;
         String lastName1;
@@ -1811,10 +1924,20 @@ public class AdminVist extends javax.swing.JFrame {
         String telephone = this.medicTelephoneEdit.getText();
         int validate = medicID.length() + telephone.length();
         if (validate <= 18 && validate >= 17) {
+            m.setMedicId(medicID);
+            m.setTelephone(telephone);
             if (this.unlockMedicFields.isSelected()) {
                 name = this.nameMedicEdit1.getText();
                 lastName1 = this.medicFirstnameEdit.getText();
                 lastName2 = this.medicLastnameEdit.getText();
+                m.setName(name + " " + lastName1 + " " + lastName2);
+                this.server.openConecction();
+                this.server.updateMedic(m, 2);
+                this.server.closeConnection();
+            } else {
+                this.server.openConecction();
+                this.server.updateMedic(m, 1);
+                this.server.closeConnection();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Introduzca correctamente los campos identificador y telefono");
@@ -1860,6 +1983,23 @@ public class AdminVist extends javax.swing.JFrame {
             System.out.println(p.getId());
         }
     }//GEN-LAST:event_showPacientsActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        if (this.jTabbedPane1.getSelectedIndex() == 3) {
+            addMedicsFromDataBase();
+        }
+
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jTabbedPane4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane4StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane4StateChanged
+    //boton de visualización de citas
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        printCites();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2015,7 +2155,6 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastNameMedic1;
     private javax.swing.JTextField lastNameMedic2;
     private javax.swing.JButton logOutPB;
@@ -2034,6 +2173,7 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> selectMedic;
     private javax.swing.JComboBox<String> sex;
     private javax.swing.JButton showPacients;
+    private javax.swing.JTable tableCites;
     private javax.swing.JCheckBox unlockFields;
     private javax.swing.JCheckBox unlockMedicFields;
     private com.toedter.calendar.JDateChooser userDate;
