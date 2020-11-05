@@ -519,8 +519,6 @@ public class MedicVist extends javax.swing.JFrame {
             this.confirmAtention.setEnabled(true);
             this.confirmAtention.setSelected(false);
             this.startCitePB.setEnabled(true);
-            this.cite.setReason(reason);
-            this.cite.setTreatment(treatmentPacient);
             this.cite.setAttention(true);
             //acciones de la base de datos inicio
             // fin acciones de la base de datos

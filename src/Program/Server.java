@@ -32,27 +32,29 @@ public class Server {
         //cambio en la información (contraseña del administrador)
     }
     public void openConecction(){
-        //apertura de conexión a la base de datos por tipo de usuario
-        /*if(this.typeUser == 1){//administador
-            admin = new Administrator();
-            admin.openConnection();
-        }
-        else if(this.typeUser == 2){//medico
-            medic = new Medic();
-        }*/
         this.connection = new GestorDB();
         this.connection.openConection();
     }
+    //obtener todos los pacientes
     public List<Pacient> getPacients(){
         List<Pacient> pacients = this.connection.getPacients();
-        for(Pacient p:pacients){
-            System.out.println(p.getId());
-        }
         return pacients;
     }
     public void addPacient(Pacient p, java.sql.Date date){
         //nota debe de detectar el tipo de sesión y agregar
         this.connection.addPacient(p, date);
+    }
+    public void updatePacient(Pacient p, int type){
+        this.connection.modifyPacient(p, type);
+    }
+    //medicos
+    public List<Medic> getMedics(){
+        List<Medic> medics = this.connection.getMedics();
+        return medics;
+    }
+    //agregar médico
+    public void addMedic(Medic m){
+        this.connection.addMedic(m);
     }
     public void changeInfoMedic(String password){
         //cambio en la contraseña del médico

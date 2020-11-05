@@ -22,21 +22,7 @@ public class Cites {
         this.id = id;
     }
 
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public String getTreatment() {
-        return Treatment;
-    }
-
-    public void setTreatment(String Treatment) {
-        this.Treatment = Treatment;
-    }
+    
      public boolean isAttention() {
         return attention;
     }
@@ -44,11 +30,26 @@ public class Cites {
     public void setAttention(boolean Attention) {
         this.attention = Attention;
     }
+
+    public int getIdMedic() {
+        return idMedic;
+    }
+
+    public void setIdMedic(int idMedic) {
+        this.idMedic = idMedic;
+    }
+
+    public int getIdPacient() {
+        return idPacient;
+    }
+
+    public void setIdPacient(int idPacient) {
+        this.idPacient = idPacient;
+    }
+    
     //propieties
     private int id;
-    private String reason;
-    private String Treatment;
+    private int idMedic;
+    private int idPacient;
     private boolean attention;
-
-   
 }

@@ -5,39 +5,39 @@
  */
 package Models;
 
-import Database.GestorDB;
-
 /**
  * 
  * @author Shadowkiller
  */
 public class Administrator {
-    //methods
-    public Administrator(){
-        this.database = null;
-        this.pacient = null;
+
+    public String getUsername() {
+        return username;
     }
-    public void openConnection(){
-        //metodo para la apertura de la base de datos
-        this.database = new GestorDB();
-        database.openConection();
-    }
-    public void addPacient(Pacient pacient, java.sql.Date date){}
-    public void deletePacient(int id){}
-    public void updatePacient(Pacient pacient){}
-    public void addMedic(){}
-    public void deleteMedic(int id){}
-    public void updateMedic(Medic medic){}
-    public void addCite(){}
-    public void deleteCite(int id){}
-    public void updateInfo(String username, String password)
-    {
-        this.password = password;
+
+    public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Pacient getPacient() {
+        return pacient;
+    }
+
+    //methods
+    public void setPacient(Pacient pacient) {
+        this.pacient = pacient;
+    }
+    
     //propieties
     private String username;
     private String password;
     private Pacient pacient;
-    private GestorDB database;
 }

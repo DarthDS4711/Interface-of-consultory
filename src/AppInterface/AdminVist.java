@@ -5,6 +5,8 @@
  */
 package AppInterface;
 
+import Models.Administrator;
+import Models.Medic;
 import Models.Pacient;
 import Program.Server;
 import java.util.Date;
@@ -26,8 +28,8 @@ public class AdminVist extends javax.swing.JFrame {
     }
 
     //methods public
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUser(Administrator admin) {
+        this.password = admin.getPassword();
     }
 
     /**
@@ -474,6 +476,7 @@ public class AdminVist extends javax.swing.JFrame {
         editPB.setForeground(new java.awt.Color(255, 255, 255));
         editPB.setText("Editar Usuario");
         editPB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editPB.setEnabled(false);
         editPB.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 editPBStateChanged(evt);
@@ -743,7 +746,6 @@ public class AdminVist extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-add-32 (1).png"))); // NOI18N
         jButton2.setText("Agregar Médico");
-        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -1549,22 +1551,40 @@ public class AdminVist extends javax.swing.JFrame {
     //boton de confirmación de modificación de un usuario
     private void editPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPBActionPerformed
         // TODO add your handling code here:
-        String IDuser = this.deleteUserID.getText();
+        Pacient p = new Pacient();
+        String IDuser = this.userIdEdit.getText();
         String name;
         String lastName1;
         String lastName2;
         String telephone = this.userTelephoneEdit.getText();
         char sexUser = '0';
-        if (this.unlockFields.isSelected()) {
-            name = this.usernameEdit.getText();
-            lastName1 = this.userFirstNameEdit.getText();
-            lastName2 = this.userLastnameEdit.getText();
-            int indexCurrent = this.userSexEdit.getSelectedIndex();
-            if (indexCurrent == 0) {
-                sexUser = 'H';
-            } else {
-                sexUser = 'M';
+        p.setId(IDuser);
+        p.setTelefono(telephone);
+        int validate = IDuser.length() + telephone.length();
+        if (validate >= 10) {
+            System.out.println("Hola");
+            if (this.unlockFields.isSelected()) {
+                name = this.usernameEdit.getText();
+                lastName1 = this.userFirstNameEdit.getText();
+                lastName2 = this.userLastnameEdit.getText();
+                validate = lastName1.length() + lastName2.length() + name.length();
+                if (validate >= 3) {
+                    int indexCurrent = this.userSexEdit.getSelectedIndex();
+                    if (indexCurrent == 0) {
+                        sexUser = 'H';
+                    } else {
+                        sexUser = 'M';
+                    }
+                    p.setNombre(name);
+                    p.setApellido1(lastName1);
+                    p.setApellido2(lastName2);
+                    this.server.openConecction();
+                    this.server.updatePacient(p, 2);
+                }
             }
+            System.out.print(Integer.parseInt(p.getId()));                
+            this.server.openConecction();
+            this.server.updatePacient(p, 1);
         }
     }//GEN-LAST:event_editPBActionPerformed
     //caja seleccionable para desbloqueo de campos especiales (modificar usuario)
@@ -1666,7 +1686,6 @@ public class AdminVist extends javax.swing.JFrame {
         java.sql.Date date = new java.sql.Date(dateInLong);
         int validate = nameUser.length() + userLastName1.length() + userLastName2.length() + telephoneUser.length();
         if (validate >= 13) {
-            this.server = new Server();
             this.server.openConecction();
             Pacient p = new Pacient();
             p.setNombre(nameUser);
@@ -1765,8 +1784,16 @@ public class AdminVist extends javax.swing.JFrame {
         if (id.length() <= 8 && id.length() >= 7) {
             int validateInfo = id.length() + nameMedic.length() + lastName1.length() + lastName2.length();
             validateInfo = validateInfo + telephone.length() + passwordMedic.length();
-            if (validateInfo >= 24) {
-
+            if (validateInfo >= 25) {
+                Medic m = new Medic();
+                m.setMedicId(id);
+                m.setName(nameMedic + " " + lastName1 + " " + lastName2);
+                m.setTelephone(telephone);
+                m.setEspeciality(especiality);
+                m.setPassword(passwordMedic);
+                this.server.openConecction();
+                System.out.println(passwordMedic);
+                this.server.addMedic(m);
             } else {
                 JOptionPane.showMessageDialog(null, "Introduzca correctamente los datos");
             }
@@ -1776,6 +1803,7 @@ public class AdminVist extends javax.swing.JFrame {
     //boton de moo¿dificación de un médico
     private void editMedicPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMedicPBActionPerformed
         // TODO add your handling code here:
+        Pacient p = new Pacient();
         String medicID = this.medicIdEdit.getText();
         String name;
         String lastName1;
@@ -1826,10 +1854,9 @@ public class AdminVist extends javax.swing.JFrame {
     //boton para mostrar pacientes
     private void showPacientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPacientsActionPerformed
         // TODO add your handling code here:
-        this.server = new Server();
         this.server.openConecction();
         List<Pacient> pacients = this.server.getPacients();
-        for(Pacient p:pacients){
+        for (Pacient p : pacients) {
             System.out.println(p.getId());
         }
     }//GEN-LAST:event_showPacientsActionPerformed
@@ -1860,7 +1887,6 @@ public class AdminVist extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AdminVist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1870,7 +1896,7 @@ public class AdminVist extends javax.swing.JFrame {
     }
     //propieties of system
     private String password;
-    private Server server;
+    private Server server = new Server();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField LastName;
     private javax.swing.JButton addCitePB;

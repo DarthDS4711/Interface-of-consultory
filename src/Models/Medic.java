@@ -5,7 +5,6 @@
  */
 package Models;
 
-import Database.GestorDB;
 
 /**
  *
@@ -14,14 +13,16 @@ import Database.GestorDB;
 public class Medic {
     //methods
     public Medic(){
-        this.database = null;
+        this.status = false;
     }
-    public void setTelephone(String data){}
+    public void setTelephone(String data){
+        this.telephone = data;
+    }
     public String getTelephone(){return this.telephone;}
-    public void setPassword(String data){}
+    public void setPassword(String data){
+        this.password = data;
+    }
     public String getPassword(){return this.password;}
-    public String getHistoricalMedic(int id){return this.password;}
-    public void updateHistoricalMedic(int id, History history){}
     public String getMedicId() {
         return medicId;
     }
@@ -30,13 +31,14 @@ public class Medic {
         this.medicId = medicId;
     }
 
-    public int getEspeciality() {
+    public String getEspeciality() {
         return especiality;
     }
 
-    public void setEspeciality(int especiality) {
+    public void setEspeciality(String especiality) {
         this.especiality = especiality;
     }
+
     public String getName() {
         return name;
     }
@@ -60,13 +62,21 @@ public class Medic {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     //propieties
     private String telephone;
     private String password;
     private String medicId;
-    private int especiality;
+    private String especiality;
     private String name;
     private String firstName;
     private String lastName;
-    private GestorDB database;
+    private boolean status;
 }
