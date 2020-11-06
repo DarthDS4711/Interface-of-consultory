@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/AppInterface/AdminVist.java</file>
-            <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/AppInterface/MedicVist.java</file>
-            <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/Models/Pacient.java</file>
-            <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/Database/GestorDB.java</file>
-            <file>file:/F:/Archivos/Java/Aplicaciones/MedicalDatabase/src/Program/Server.java</file>
+            <file>file:/D:/Documents/Java/Database/Interface-of-consultory/src/AppInterface/MedicVist.java</file>
+            <file>file:/D:/Documents/Java/Database/Interface-of-consultory/src/Program/Server.java</file>
+            <file>file:/D:/Documents/Java/Database/Interface-of-consultory/src/AppInterface/AdminVist.java</file>
+            <file>file:/D:/Documents/Java/Database/Interface-of-consultory/src/Database/GestorDB.java</file>
+            <file>file:/D:/Documents/Java/Database/Interface-of-consultory/src/AppInterface/Login.java</file>
         </group>
     </open-files>
 </project-private>

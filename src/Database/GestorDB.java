@@ -5,6 +5,7 @@
 package Database;
 
 import Models.Cites;
+import Models.History;
 import Models.Medic;
 import Models.Pacient;
 import java.sql.Connection;
@@ -296,7 +297,26 @@ public class GestorDB {
         closeInstruction();
         return list;
     }
-
+    public List<Cites> getCiteOfMedic(int id){
+        List<Cites> cites = new ArrayList<>();
+        try {
+            String sql = "SELECT ID, ID_Paciente, Fecha FROM cita WHERE Status = 0 and ID_Medico = ?";
+            this.instruction1 = this.conection.prepareStatement(sql);
+            this.instruction1.setInt(1, id);
+            ResultSet result = this.instruction1.executeQuery();
+            while(result.next()) {
+                Cites c = new Cites();
+                c.setId(result.getInt("ID"));
+                c.setIdPacient(result.getInt("ID_Paciente"));
+                c.setDate(result.getTimestamp("Fecha"));
+                cites.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeInstruction1();
+        return cites;
+    }
     public int getCite(int id) {
         int status = 0;
         try {
@@ -342,6 +362,42 @@ public class GestorDB {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    //historial medico
+    public List<History> getHistoryMedical(int id){
+        List<History> list = new ArrayList<>();
+        String sql = "SELECT Tratamiento, Motivo, ID_Medico FROM historial_medico WHERE ID_Paciente = ?";
+        try {
+            this.instruction1 = this.conection.prepareStatement(sql);
+            this.instruction1.setInt(1, id);
+            ResultSet result = this.instruction1.executeQuery();
+            while(result.next()) {
+                History h = new History();
+                h.setTreatment(result.getString("Tratamiento"));
+                h.setReason(result.getString("Motivo"));
+                h.setId_medic(result.getInt("ID_Medico"));
+                list.add(h);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeInstruction1();
+        return list;
+    }
+    public void addHistory(History h){
+        String sql_insert = "INSERT INTO historial_medico(ID_Paciente, Tratamiento, Motivo, ID_Medico) VALUES(?, ?, ?, ?)";
+        try {
+            this.instruction1 = this.conection.prepareStatement(sql_insert);
+            this.instruction1.setInt(1, h.getId_pacient());
+            this.instruction1.setString(2, h.getTreatment());
+            this.instruction1.setString(3, h.getReason());
+            this.instruction1.setInt(4, h.getId_medic());
+            this.instruction1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "historial del paciente actualizado correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeInstruction1();
+    }
     //cierre de conexiones
     public void closeInstruction() {
         try {
@@ -365,10 +421,6 @@ public class GestorDB {
         } catch (SQLException ex) {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public String getHistoricalMedic(int idPacient) {
-        return "test";
     }
     //propieties
     private String driver;

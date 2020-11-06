@@ -83,6 +83,9 @@ public class Server {
     public List<Cites> getCites(){
         return this.connection.getCites();
     }
+    public List<Cites> getCites(int id){
+        return this.connection.getCiteOfMedic(id);
+    }
     public int getCite(int id){
         return this.connection.getCite(id);
     }
@@ -97,6 +100,13 @@ public class Server {
     }
     public void changeInfoMedic(Medic medic){
         //cambio en la información del médico
+    }
+    //historial medico
+    public List<History> getHistory(int id){
+        return this.connection.getHistoryMedical(id);
+    }
+    public void addHistory(History h){
+        connection.addHistory(h);
     }
     //propieties
     GestorDB connection;//nota dicha propiedad solamente sera usada para buscar medicos
