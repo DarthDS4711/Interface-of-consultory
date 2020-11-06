@@ -1843,7 +1843,7 @@
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="citeIdModify" pref="191" max="32767" attributes="0"/>
+                                          <Component id="citeIdModify" max="32767" attributes="0"/>
                                           <Component id="dateCiteModify" alignment="0" max="32767" attributes="0"/>
                                           <Component id="citeIdMedicEdit" alignment="0" max="32767" attributes="0"/>
                                       </Group>
@@ -1931,6 +1931,9 @@
                       </Properties>
                     </Component>
                     <Component class="com.toedter.calendar.JDateChooser" name="dateCiteModify">
+                      <Properties>
+                        <Property name="dateFormatString" type="java.lang.String" value="yyyy-MMM-dd HH:mm"/>
+                      </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="citeModifyPB">
                       <Properties>

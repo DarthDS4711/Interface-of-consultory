@@ -36,10 +36,15 @@ public class AdminVist extends javax.swing.JFrame {
         for (Medic m : medics) {
             this.selectMedic.addItem(m.getMedicId());
         }
+        for (Medic m : medics) {
+            this.citeIdMedicEdit.addItem(m.getMedicId());
+        }
+        this.server.closeConnection();
     }
 
     public void deleteMedics() {
         this.selectMedic.removeAllItems();
+        this.citeIdMedicEdit.removeAllItems();
     }
 
     public AdminVist() {
@@ -50,10 +55,11 @@ public class AdminVist extends javax.swing.JFrame {
     public void setUser(Administrator admin) {
         this.password = admin.getPassword();
     }
+
     //mostrar citas
-    public void printCites(){
+    public void printCites() {
         this.server.openConecction();
-        List<Cites> cites= this.server.getCites();
+        List<Cites> cites = this.server.getCites();
         this.server.closeConnection();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
@@ -61,7 +67,7 @@ public class AdminVist extends javax.swing.JFrame {
         model.addColumn("ID_Medico");
         model.addColumn("Fecha");
         String data[] = new String[4];
-        for(Cites c: cites){
+        for (Cites c : cites) {
             data[0] = String.valueOf(c.getId());
             data[1] = String.valueOf(c.getIdPacient());
             data[2] = String.valueOf(c.getIdMedic());
@@ -69,6 +75,21 @@ public class AdminVist extends javax.swing.JFrame {
             model.addRow(data);
         }
         this.tableCites.setModel(model);
+    }
+
+    public boolean validateDate(java.sql.Timestamp date) {
+        boolean status = true;
+        this.server.openConecction();
+        List<Cites> cites = this.server.getCites();
+        this.server.closeConnection();
+        for (Cites c : cites) {
+            java.sql.Timestamp dateCite = c.getDate();
+            if (dateCite.equals(date)) {
+                status = false;
+                break;
+            }
+        }
+        return status;
     }
 
     /**
@@ -1222,6 +1243,8 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel48.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel48.setText("Fecha Consulta");
 
+        dateCiteModify.setDateFormatString("yyyy-MMM-dd HH:mm");
+
         citeModifyPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         citeModifyPB.setText("Modificar Cita");
         citeModifyPB.setEnabled(false);
@@ -1267,7 +1290,7 @@ public class AdminVist extends javax.swing.JFrame {
                             .addComponent(jLabel48))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(citeIdModify, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(citeIdModify)
                             .addComponent(dateCiteModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(citeIdMedicEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -1823,7 +1846,7 @@ public class AdminVist extends javax.swing.JFrame {
             Cites cite = new Cites();
             int indexCurrent = this.selectMedic.getSelectedIndex();
             String medicID = this.selectMedic.getItemAt(indexCurrent);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String theDate = dateFormat.format(this.dateCite.getDate());
             java.util.Date convert = null;
             try {
@@ -1833,13 +1856,17 @@ public class AdminVist extends javax.swing.JFrame {
             }
             if (convert != null) {
                 java.sql.Timestamp date = new java.sql.Timestamp(convert.getTime());
-                JOptionPane.showMessageDialog(null, date);
-                cite.setIdPacient(Integer.parseInt(userID));
-                cite.setIdMedic(Integer.parseInt(medicID));
-                cite.setDate(date);
-                this.server.openConecction();
-                this.server.addCite(cite);
-                this.server.closeConnection();
+                boolean status = validateDate(date);
+                if (status) {
+                    cite.setIdPacient(Integer.parseInt(userID));
+                    cite.setIdMedic(Integer.parseInt(medicID));
+                    cite.setDate(date);
+                    this.server.openConecction();
+                    this.server.addCite(cite);
+                    this.server.closeConnection();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Horario ya ingresado");
+                }
             }
         }
     }//GEN-LAST:event_addCitePBActionPerformed
@@ -1848,9 +1875,39 @@ public class AdminVist extends javax.swing.JFrame {
         // TODO add your handling code here:
         String idCite = this.citeIdModify.getText();
         if (idCite.length() > 0) {
-            int currentIndex = this.citeIdMedicEdit.getSelectedIndex();
-            String medicId = this.citeIdMedicEdit.getItemAt(currentIndex);
-            String citeDate = ((JTextField) this.dateCiteModify.getDateEditor().getUiComponent()).getText();
+            this.server.openConecction();
+            int status = this.server.getCite(Integer.parseInt(idCite));
+            this.server.closeConnection();
+            if (status == 0) {
+                JOptionPane.showMessageDialog(null, "Numero de cita no existente");
+            } else {
+                int currentIndex = this.citeIdMedicEdit.getSelectedIndex();
+                String medicId = this.citeIdMedicEdit.getItemAt(currentIndex);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                String theDate = dateFormat.format(this.dateCiteModify.getDate());
+                java.util.Date convert = null;
+                try {
+                    convert = dateFormat.parse(theDate);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AdminVist.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (convert != null) {
+                    java.sql.Timestamp date = new java.sql.Timestamp(convert.getTime());
+                    boolean state = validateDate(date);
+                    if (state) {
+                        Cites cite = new Cites();
+                        cite.setId(Integer.parseInt(idCite));
+                        cite.setIdMedic(Integer.parseInt(medicId));
+                        cite.setDate(date);
+                        this.server.openConecction();
+                        this.server.updateCite(cite);
+                        this.server.closeConnection();
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Horario ya ingresado");
+                }
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Introduzca correctamente el número de cita");
         }
@@ -1870,6 +1927,17 @@ public class AdminVist extends javax.swing.JFrame {
         String citeId = this.citeIdToDelete.getText();
         if (citeId.length() > 0) {
             //acciones hacia la base de datos
+            this.server.openConecction();
+            int status = this.server.getCite(Integer.parseInt(citeId));
+            this.server.closeConnection();
+            if(status == 0){
+                JOptionPane.showMessageDialog(null, "cita no registrada");
+            }
+            else{
+                this.server.openConecction();
+                this.server.deleteCite(Integer.parseInt(citeId));
+                this.server.closeConnection();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Introduzca correctamente el número de cita");
         }

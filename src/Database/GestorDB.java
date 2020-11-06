@@ -40,6 +40,7 @@ public class GestorDB {
             JOptionPane.showMessageDialog(null, "Error de conexión con mysql");
         }
     }
+
     //pacientes
     public List<Pacient> getPacients() {
         try {
@@ -90,7 +91,7 @@ public class GestorDB {
         closeInstruction1();
     }
 
-     public int getPacient(int id) {
+    public int getPacient(int id) {
         this.instruction1 = null;
         int state = 0;
         try {
@@ -98,7 +99,7 @@ public class GestorDB {
             this.instruction1 = this.conection.prepareStatement(sql);
             this.instruction1.setInt(1, id);
             ResultSet result = this.instruction1.executeQuery();
-            if(result.next()){
+            if (result.next()) {
                 state = 1;
             }
         } catch (SQLException ex) {
@@ -107,7 +108,8 @@ public class GestorDB {
         closeInstruction1();
         return state;
     }
-      public void modifyPacient(Pacient pacient, int type) {
+
+    public void modifyPacient(Pacient pacient, int type) {
         this.instruction1 = null;
         String sql_update = "UPDATE paciente SET Nombre = ?, Apellido1 = ?, Apellido2 = ?, Telefono = ? WHERE id = ?";
         if (type == 1) {
@@ -134,7 +136,8 @@ public class GestorDB {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void deletePacient(int id){
+
+    public void deletePacient(int id) {
         this.instruction1 = null;
         String sql_delete = "UPDATE paciente SET Status = ? WHERE id = ?";
         try {
@@ -148,6 +151,7 @@ public class GestorDB {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     //medicos esta parte solo se agregan métodos de medicos
     public void addMedic(Medic medic) {
         String sql_insert = "INSERT INTO medico(ID, Nombre, Password, Telefono, Especialidad, Status) VALUES(?, ?, ?, ?, ?, ?)";
@@ -191,6 +195,7 @@ public class GestorDB {
         closeInstruction();
         return medics;
     }
+
     public int getMedic(int id) {
         this.instruction1 = null;
         int state = 0;
@@ -199,7 +204,7 @@ public class GestorDB {
             this.instruction1 = this.conection.prepareStatement(sql);
             this.instruction1.setInt(1, id);
             ResultSet result = this.instruction1.executeQuery();
-            if(result.next()){
+            if (result.next()) {
                 state = 1;
             }
         } catch (SQLException ex) {
@@ -208,7 +213,8 @@ public class GestorDB {
         closeInstruction1();
         return state;
     }
-    public void updateMedic(int type, Medic m){
+
+    public void updateMedic(int type, Medic m) {
         this.instruction1 = null;
         String sql_update = "UPDATE medico SET Nombre = ?, Telefono = ? WHERE id = ?";
         if (type == 1) {
@@ -233,7 +239,8 @@ public class GestorDB {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void deleteMedic(int id){
+
+    public void deleteMedic(int id) {
         this.instruction1 = null;
         String sql_delete = "UPDATE medico SET Status = ? WHERE ID = ?";
         try {
@@ -247,8 +254,9 @@ public class GestorDB {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     //metodos de citas
-    public void addCite(Cites c){
+    public void addCite(Cites c) {
         String sql_insert = "INSERT INTO cita(ID_Paciente, Status, ID_Medico, Fecha) VALUES(?, ?, ?, ?)";
         try {
             this.instruction1 = this.conection.prepareStatement(sql_insert);
@@ -263,7 +271,8 @@ public class GestorDB {
         }
         closeInstruction1();
     }
-    public List<Cites> getCites(){
+
+    public List<Cites> getCites() {
         List<Cites> list = new ArrayList<>();
         try {
             this.instruction = conection.createStatement();
@@ -287,6 +296,52 @@ public class GestorDB {
         closeInstruction();
         return list;
     }
+
+    public int getCite(int id) {
+        int status = 0;
+        try {
+            String sql = "SELECT ID FROM cita WHERE Status = 0 and ID = ?";
+            this.instruction1 = this.conection.prepareStatement(sql);
+            this.instruction1.setInt(1, id);
+            ResultSet result = this.instruction1.executeQuery();
+            if (result.next()) {
+                status = 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        closeInstruction1();
+        return status;
+    }
+
+    public void updateCite(Cites c) {
+        this.instruction1 = null;
+        String sql_update = "UPDATE cita SET ID_Medico = ?, Fecha = ? WHERE id = ?";
+        try {
+            this.instruction1 = this.conection.prepareStatement(sql_update);
+            this.instruction1.setInt(1, c.getIdMedic());
+            this.instruction1.setTimestamp(2, c.getDate());
+            this.instruction1.setInt(3, c.getId());
+            this.instruction1.executeUpdate();
+            JOptionPane.showMessageDialog(null, "cita modificado");
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void deleteCite(int id){
+        this.instruction1 = null;
+        String sql_delete = "UPDATE cita SET Status = ? WHERE ID = ?";
+        try {
+            this.instruction1 = this.conection.prepareStatement(sql_delete);
+            this.instruction1.setBoolean(1, true);
+            this.instruction1.setInt(2, id);
+            this.instruction1.executeLargeUpdate();
+            JOptionPane.showMessageDialog(null, "cita eliminada correctamente");
+            closeInstruction1();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     //cierre de conexiones
     public void closeInstruction() {
         try {
@@ -303,14 +358,15 @@ public class GestorDB {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void closeConnection(){
+
+    public void closeConnection() {
         try {
             this.conection.close();
         } catch (SQLException ex) {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public String getHistoricalMedic(int idPacient) {
         return "test";
     }

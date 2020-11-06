@@ -76,11 +76,21 @@ public class Server {
     public void deleteMedic(int id){
         this.connection.deleteMedic(id);
     }
+    //metodos de citas
     public void addCite(Cites c){
         this.connection.addCite(c);
     }
     public List<Cites> getCites(){
         return this.connection.getCites();
+    }
+    public int getCite(int id){
+        return this.connection.getCite(id);
+    }
+    public void updateCite(Cites c){
+        this.connection.updateCite(c);
+    }
+    public void deleteCite(int id){
+        this.connection.deleteCite(id);
     }
     public void changeInfoMedic(String password){
         //cambio en la contraseña del médico
@@ -88,7 +98,6 @@ public class Server {
     public void changeInfoMedic(Medic medic){
         //cambio en la información del médico
     }
-    //metodos de citas
     //propieties
     GestorDB connection;//nota dicha propiedad solamente sera usada para buscar medicos
     Administrator admin;
