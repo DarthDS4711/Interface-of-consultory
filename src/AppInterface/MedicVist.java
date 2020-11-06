@@ -4,9 +4,14 @@
  * and open the template in the editor.
  */
 package AppInterface;
-import Models.Cites;
+import Models.*;
+import Program.Server;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,15 +21,88 @@ public class MedicVist extends javax.swing.JFrame {
 
     /**
      * Creates new form MedicVist
+     * @param m
      */
     //methods public 
-    public void setPassword(String password){
-        this.password = password;
+    public void setMedic(Medic m){
+        this.m = m;
+        this.password = m.getPassword();
     }
     public MedicVist() {
         initComponents();
+        dataListCite();
+        this.cite.setId(-1);
+        this.cite.setIdMedic(Integer.parseInt(m.getMedicId()));
+        this.m.setMedicId("12345698");
     }
-
+    //methods 
+    private void dataListCite(){
+        int id = Integer.parseInt(this.m.getMedicId());
+        this.server.openConecction();
+        this.listCites = this.server.getCites(id);
+        this.server.closeConnection();
+        setInfoAttention();
+    }
+    private void printCites(){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID_Cita");
+        model.addColumn("ID_Paciente");
+        model.addColumn("Fecha");
+        String data[] = new String[3];
+        for (Cites c : this.listCites) {
+            data[0] = String.valueOf(c.getId());
+            data[1] = String.valueOf(c.getIdPacient());
+            data[2] = String.valueOf(c.getDate());
+            model.addRow(data);
+        }
+        this.attentionTable.setModel(model);
+    }
+    private void setInfoAttention(){
+        this.citesOfAttention.removeAllItems();
+        for (Cites c : this.listCites) {
+            this.citesOfAttention.addItem(String.valueOf(c.getId()));
+            System.out.println(this.citesOfAttention.getSelectedItem());
+        }
+        
+    }
+    private void printHistory(List<History> h){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID_Medico");
+        model.addColumn("Motivo");
+        model.addColumn("Tratamiento");
+        String data[] = new String[3];
+        for (History history : h) {
+            data[0] = String.valueOf(history.getId_medic());
+            data[1] = history.getReason();
+            data[2] = history.getTreatment();
+            model.addRow(data);
+        }
+        this.historyTable.setModel(model);
+    }
+    private int obtainIdPacient(int idCite){
+        int id = -1;
+        for(Cites c: this.listCites){
+            if(idCite == c.getId()){
+               id = c.getIdPacient();
+               break;
+            }
+            //JOptionPane.showMessageDialog(null, c.toString());
+        }
+        return id;
+    }
+    private void updateDatabase(){
+        int citeID = this.cite.getId();
+        this.server.openConecction();
+        this.server.deleteCite(citeID);
+        this.server.closeConnection();
+    }
+    private void changeAndUpdateCites(){
+        //actualiza la base de datos
+        updateDatabase();
+        //con la información actualizada se genera la lista de citas nuevamente
+        dataListCite();
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,21 +116,15 @@ public class MedicVist extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        attentionTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        getHistoryMedical = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         AtentionPane = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        numberOfCite = new javax.swing.JComboBox<>();
+        citesOfAttention = new javax.swing.JComboBox<>();
         confirmAtention = new javax.swing.JCheckBox();
         startCitePB = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
@@ -63,6 +135,12 @@ public class MedicVist extends javax.swing.JFrame {
         consultTreatment = new javax.swing.JTextField();
         consultMotif = new javax.swing.JTextField();
         finishConsultPB = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        historyTable = new javax.swing.JTable();
+        getHistoryMedical = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel7 = new javax.swing.JPanel();
@@ -84,12 +162,17 @@ public class MedicVist extends javax.swing.JFrame {
 
         jTabbedPane1.setBackground(new java.awt.Color(51, 51, 51));
         jTabbedPane1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-bookmark-book-96.png"))); // NOI18N
 
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(attentionTable);
 
         jButton1.setBackground(java.awt.Color.darkGray);
         jButton1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -137,57 +220,6 @@ public class MedicVist extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Mostrar Citas", jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-activity-history-96.png"))); // NOI18N
-
-        jScrollPane2.setViewportView(jTable2);
-
-        getHistoryMedical.setBackground(java.awt.Color.black);
-        getHistoryMedical.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        getHistoryMedical.setForeground(new java.awt.Color(255, 255, 255));
-        getHistoryMedical.setText("Obtener Historial Médico");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
-        jLabel4.setToolTipText("<html>\n<p>\nEsta sección del menú muestra el historial clinico de<br/>\nun paciente en cuestion atendido\n</p>\n</html>");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(getHistoryMedical)
-                .addGap(274, 274, 274))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(getHistoryMedical)
-                .addGap(12, 12, 12))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel4)
-                .addGap(73, 73, 73)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Historial Medico", jPanel2);
-
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -202,7 +234,7 @@ public class MedicVist extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel6.setText("Número ficha cita");
 
-        numberOfCite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", " " }));
+        citesOfAttention.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
         confirmAtention.setText("La cita en cuestión es atendida y llevada a cabo con el paciente en presencia física");
         confirmAtention.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +268,7 @@ public class MedicVist extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(numberOfCite, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(citesOfAttention, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(256, 256, 256)
                         .addComponent(startCitePB)))
@@ -261,12 +293,12 @@ public class MedicVist extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(numberOfCite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(citesOfAttention, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(confirmAtention)
                 .addGap(18, 18, 18)
                 .addComponent(startCitePB)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         AtentionPane.addTab("Comenzar Cita", jPanel5);
@@ -339,6 +371,62 @@ public class MedicVist extends javax.swing.JFrame {
         jPanel3.add(AtentionPane);
 
         jTabbedPane1.addTab("Atender cita", jPanel3);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-activity-history-96.png"))); // NOI18N
+
+        jScrollPane2.setViewportView(historyTable);
+
+        getHistoryMedical.setBackground(java.awt.Color.black);
+        getHistoryMedical.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        getHistoryMedical.setForeground(new java.awt.Color(255, 255, 255));
+        getHistoryMedical.setText("Obtener Historial Médico");
+        getHistoryMedical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getHistoryMedicalActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
+        jLabel4.setToolTipText("<html>\n<p>\nEsta sección del menú muestra el historial clinico de<br/>\nun paciente en cuestion atendido\n</p>\n</html>");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(getHistoryMedical)
+                .addGap(274, 274, 274))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(getHistoryMedical)
+                .addGap(12, 12, 12))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel4)
+                .addGap(73, 73, 73)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Historial Medico", jPanel2);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new java.awt.GridLayout(1, 0));
@@ -481,9 +569,10 @@ public class MedicVist extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //boton de mostrar las citas de relacionadas al medico
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        this.printCites();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void logOutPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutPBActionPerformed
@@ -500,14 +589,17 @@ public class MedicVist extends javax.swing.JFrame {
     //boton de atención de la cita
     private void startCitePBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startCitePBActionPerformed
         // TODO add your handling code here:
-        int index = this.numberOfCite.getSelectedIndex();
-        int numberCite = Integer.parseInt(this.numberOfCite.getItemAt(index));
+        int index = this.citesOfAttention.getSelectedIndex();
+        int numberCite = Integer.parseInt(this.citesOfAttention.getItemAt(index));
         System.out.println(numberCite);
         //acciones le la aplicación
         this.AtentionPane.setSelectedIndex(1);
         this.confirmAtention.setEnabled(false);
         this.startCitePB.setEnabled(false);
         this.cite.setId(numberCite);
+        int idPacient = obtainIdPacient(cite.getId());
+        this.cite.setIdPacient(idPacient);
+        JOptionPane.showMessageDialog(null, cite.toString());
     }//GEN-LAST:event_startCitePBActionPerformed
     //boton de finalización de la cita
     private void finishConsultPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishConsultPBActionPerformed
@@ -521,10 +613,22 @@ public class MedicVist extends javax.swing.JFrame {
             this.startCitePB.setEnabled(true);
             this.cite.setAttention(true);
             //acciones de la base de datos inicio
+            History h = new History();
+            h.setId_medic(cite.getIdMedic());
+            h.setReason(reason);
+            h.setTreatment(treatmentPacient);
+            h.setId_pacient(cite.getIdPacient());
             // fin acciones de la base de datos
+            this.server.openConecction();
+            this.server.addHistory(h);
+            this.server.closeConnection();
+            this.changeAndUpdateCites();
+            this.cite.setId(-1);
+            this.cite.setIdPacient(-1);
+            //JOptionPane.showMessageDialog(null, h.toString());
         }
         else
-            JOptionPane.showMessageDialog(null, "Longitud de datos máxima alcanzada");
+            JOptionPane.showMessageDialog(null, "Longitud de datos máxima alcanzada o valores nulos");
     }//GEN-LAST:event_finishConsultPBActionPerformed
     //boton de cambio de contraseña
     private void changePasswordPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordPBActionPerformed
@@ -543,6 +647,23 @@ public class MedicVist extends javax.swing.JFrame {
         else
             JOptionPane.showMessageDialog(null, "Contraseña actual incorrecta");
     }//GEN-LAST:event_changePasswordPBActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+    //boton de muestreo del historial medico del paciente atentido
+    private void getHistoryMedicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getHistoryMedicalActionPerformed
+        // TODO add your handling code here:
+        if(cite.getId() == -1)
+            JOptionPane.showMessageDialog(null, "No estas atendiendo a ningun paciente en este momento");
+        else{
+            this.server.openConecction();
+            List<History> list = this.server.getHistory(this.cite.getIdPacient());
+            this.server.closeConnection();
+            this.printHistory(list);
+        }
+    }//GEN-LAST:event_getHistoryMedicalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -580,17 +701,22 @@ public class MedicVist extends javax.swing.JFrame {
     }
     //propieties
     Cites cite = new Cites();
-    Vector<Integer> citesAtention = new Vector<Integer>();//vector de citas a atender
+    Medic m = new Medic();
+    List<Cites> listCites = new ArrayList<>();
+    Server server = new Server();
     String password;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane AtentionPane;
     private javax.swing.JPasswordField ConfirmMedicPassword;
+    private javax.swing.JTable attentionTable;
     private javax.swing.JButton changePasswordPB;
+    private javax.swing.JComboBox<String> citesOfAttention;
     private javax.swing.JCheckBox confirmAtention;
     private javax.swing.JTextField consultMotif;
     private javax.swing.JTextField consultTreatment;
     private javax.swing.JButton finishConsultPB;
     private javax.swing.JButton getHistoryMedical;
+    private javax.swing.JTable historyTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -620,12 +746,9 @@ public class MedicVist extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton logOutPB;
     private javax.swing.JPasswordField medicLastPassword;
     private javax.swing.JPasswordField medicNewPassword;
-    private javax.swing.JComboBox<String> numberOfCite;
     private javax.swing.JButton startCitePB;
     // End of variables declaration//GEN-END:variables
 }

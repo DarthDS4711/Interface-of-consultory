@@ -56,6 +56,11 @@ public class Cites {
     public void setDate(Timestamp date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Cites{" + "id=" + id + ", idMedic=" + idMedic + ", idPacient=" + idPacient + ", date=" + date + ", attention=" + attention + '}';
+    }
     
     //propieties
     private int id;
