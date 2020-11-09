@@ -49,7 +49,7 @@ public class GestorDB {
         } catch (SQLException ex) {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String sql = "SELECT id, Nombre, Apellido1, Apellido2 FROM paciente WHERE Status=0";
+        String sql = "SELECT id, Nombre, Apellido1, Apellido2, Telefono, Edad FROM paciente WHERE Status=0";
         List<Pacient> pacients = new ArrayList<>();
         try {
             ResultSet result = this.instruction.executeQuery(sql);
@@ -59,6 +59,8 @@ public class GestorDB {
                 p.setApellido1(result.getString("Apellido1"));
                 p.setApellido2(result.getString("Apellido2"));
                 p.setNombre(result.getString("Nombre"));
+                p.setTelefono(result.getString("Telefono"));
+                p.setEdad(result.getInt("Edad"));
                 pacients.add(p);
             }
 
@@ -190,7 +192,6 @@ public class GestorDB {
                 m.setTelephone(result.getString("Telefono"));
                 m.setEspeciality(result.getString("Especialidad"));
                 medics.add(m);
-                System.out.println(m.toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
