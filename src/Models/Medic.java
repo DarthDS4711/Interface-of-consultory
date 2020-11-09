@@ -15,14 +15,23 @@ public class Medic {
     public Medic(){
         this.status = false;
     }
-    public void setTelephone(String data){
-        this.telephone = data;
+
+    public String getTelephone() {
+        return telephone;
     }
-    public String getTelephone(){return this.telephone;}
-    public void setPassword(String data){
-        this.password = data;
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
-    public String getPassword(){return this.password;}
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getMedicId() {
         return medicId;
     }
@@ -70,6 +79,12 @@ public class Medic {
     public void setStatus(boolean status) {
         this.status = status;
     }
+    
+    @Override
+    public String toString() {
+        return "Medic{" + "telephone=" + telephone + ", password=" + password + ", medicId=" + medicId + ", especiality=" + especiality + ", name=" + name + '}';
+    }
+    
     //propieties
     private String telephone;
     private String password;

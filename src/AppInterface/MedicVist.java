@@ -8,8 +8,6 @@ import Models.*;
 import Program.Server;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,13 +25,12 @@ public class MedicVist extends javax.swing.JFrame {
     public void setMedic(Medic m){
         this.m = m;
         this.password = m.getPassword();
+        dataListCite();
+        this.cite.setIdMedic(Integer.parseInt(m.getMedicId()));
     }
     public MedicVist() {
         initComponents();
-        dataListCite();
-        this.cite.setId(-1);
-        this.cite.setIdMedic(Integer.parseInt(m.getMedicId()));
-        this.m.setMedicId("12345698");
+        
     }
     //methods 
     private void dataListCite(){

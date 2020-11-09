@@ -5,6 +5,8 @@
  */
 package AppInterface;
 
+import Models.Administrator;
+import Models.Medic;
 import javax.swing.JOptionPane;
 import Program.Server;
 
@@ -35,9 +37,9 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         loginPB = new javax.swing.JButton();
+        password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 0));
@@ -59,10 +61,6 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         username.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        username.setText("Username");
-
-        password.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        password.setText("Password");
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-user-account-64.png"))); // NOI18N
@@ -83,11 +81,11 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(password))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -115,7 +113,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -142,11 +140,33 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String usernameIn = this.username.getText();
         String userPassword = this.password.getText();
-        if(usernameIn.length() > 0 && userPassword.length() > 0){
+        if (usernameIn.length() > 0 && userPassword.length() > 0) {
             //acciones con la base de datos
-        }
-        else{
-           JOptionPane.showMessageDialog(null, "Introduzca correctamente sus credenciales");
+            Administrator admin = new Administrator();
+            boolean state = this.server.adminSearchInfo(userPassword, usernameIn);
+            if (state) {
+                AdminVist adminGraphic = new AdminVist();
+                adminGraphic.setVisible(true);
+                admin.setPassword(userPassword);
+                adminGraphic.setUser(admin);
+                this.dispose();
+            } else {
+                Medic m = new Medic();
+                this.server.openConecction();
+                boolean state1 = this.server.medicSearchInfo(userPassword, usernameIn);
+                if(state1){
+                    m.setMedicId(usernameIn);
+                    m.setPassword(userPassword);
+                    MedicVist medicGraphic = new MedicVist();
+                    medicGraphic.setMedic(m);
+                    medicGraphic.setVisible(true);
+                    this.dispose();
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "Credenciales invalidas");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Introduzca correctamente sus credenciales");
         }
     }//GEN-LAST:event_loginPBActionPerformed
 
@@ -185,7 +205,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
+    Server server = new Server();
+    //propieties
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -193,7 +214,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginPB;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

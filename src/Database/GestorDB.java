@@ -179,16 +179,18 @@ public class GestorDB {
         } catch (SQLException ex) {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String sql = "SELECT ID, Nombre, Telefono, Especialidad FROM medico WHERE Status=0";
+        String sql = "SELECT * FROM medico WHERE Status=0";
         try {
             ResultSet result = this.instruction.executeQuery(sql);
             while (result.next()) {
                 Medic m = new Medic();
                 m.setMedicId(String.valueOf(result.getInt("ID")));
                 m.setName(result.getString("Nombre"));
+                m.setPassword(result.getString("Password"));
                 m.setTelephone(result.getString("Telefono"));
                 m.setEspeciality(result.getString("Especialidad"));
                 medics.add(m);
+                System.out.println(m.toString());
             }
         } catch (SQLException ex) {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);

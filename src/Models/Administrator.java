@@ -27,17 +27,12 @@ public class Administrator {
         this.password = password;
     }
 
-    public Pacient getPacient() {
-        return pacient;
-    }
-
-    //methods
-    public void setPacient(Pacient pacient) {
-        this.pacient = pacient;
+    @Override
+    public String toString() {
+        return "Administrator{" + "username=" + username + ", password=" + password + '}';
     }
     
     //propieties
     private String username;
     private String password;
-    private Pacient pacient;
 }
