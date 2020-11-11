@@ -54,6 +54,7 @@ public class AdminVist extends javax.swing.JFrame {
 
     //methods public
     public void setUser(Administrator admin) {
+        this.admin = admin;
         this.password = admin.getPassword();
     }
 
@@ -2061,7 +2062,9 @@ public class AdminVist extends javax.swing.JFrame {
         if (currentPassword.equals(this.password)) {
             int validate = newPassword.length() + confirmPassword.length();
             if (validate >= 8 && newPassword.equals(confirmPassword)) {
-
+                this.admin.setPassword(newPassword);
+                this.server.adminUpdateInfo(this.admin.getPassword(), this.admin.getUsername());
+                this.password = this.admin.getPassword();
             } else {
                 JOptionPane.showMessageDialog(null, "Contraseñas no iguales o inválidas");
             }

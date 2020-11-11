@@ -641,6 +641,7 @@ public class MedicVist extends javax.swing.JFrame {
                 this.m.setPassword(newPassword);
                 this.server.updateMedic(m, 2);
                 this.server.closeConnection();
+                this.password = this.m.getPassword();
             }
             else
                 JOptionPane.showMessageDialog(null, "Las contraseñas son diferentes");

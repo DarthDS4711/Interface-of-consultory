@@ -145,6 +145,7 @@ public class Login extends javax.swing.JFrame {
             Administrator admin = new Administrator();
             boolean state = this.server.adminSearchInfo(userPassword, usernameIn);
             if (state) {
+                admin.setUsername(usernameIn);
                 AdminVist adminGraphic = new AdminVist();
                 adminGraphic.setVisible(true);
                 admin.setPassword(userPassword);

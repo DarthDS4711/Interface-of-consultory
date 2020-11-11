@@ -25,6 +25,7 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,7 +76,6 @@ public class Encripter {
             admin.setUsername(username);
             admin.setPassword(password);
             input.close();
-            System.out.println(admin.toString());
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Encripter.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -90,6 +90,7 @@ public class Encripter {
             output.println(a.getUsername());
             output.println(a.getPassword());
             output.close();
+            JOptionPane.showMessageDialog(null, "Administrador modificado correctamente");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Encripter.class.getName()).log(Level.SEVERE, null, ex);
         }
