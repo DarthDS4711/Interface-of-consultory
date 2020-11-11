@@ -224,20 +224,32 @@ public class GestorDB {
         if (type == 1) {
             sql_update = "UPDATE medico SET Telefono = ? WHERE id = ?";
         }
+        if(type == 2)
+            sql_update = "UPDATE medico SET Password = ? WHERE ID = ?";
         try {
-            if (type == 1) {
-                this.instruction1 = this.conection.prepareStatement(sql_update);
-                this.instruction1.setString(1, m.getTelephone());
-                this.instruction1.setInt(2, Integer.parseInt(m.getMedicId()));
-                this.instruction1.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Medico modificado");
-            } else {
-                this.instruction1 = this.conection.prepareStatement(sql_update);
-                this.instruction1.setString(1, m.getName());
-                this.instruction1.setString(2, m.getTelephone());
-                this.instruction1.setInt(3, Integer.parseInt(m.getMedicId()));
-                this.instruction1.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Medico modificado");
+            switch (type) {
+                case 1:
+                    this.instruction1 = this.conection.prepareStatement(sql_update);
+                    this.instruction1.setString(1, m.getTelephone());
+                    this.instruction1.setInt(2, Integer.parseInt(m.getMedicId()));
+                    this.instruction1.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Medico modificado");
+                    break;
+                case 2:
+                    this.instruction1 = this.conection.prepareStatement(sql_update);
+                    this.instruction1.setString(1, m.getPassword());
+                    this.instruction1.setString(2, m.getMedicId());
+                    this.instruction1.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Medico modificado");
+                    break;
+                default:
+                    this.instruction1 = this.conection.prepareStatement(sql_update);
+                    this.instruction1.setString(1, m.getName());
+                    this.instruction1.setString(2, m.getTelephone());
+                    this.instruction1.setInt(3, Integer.parseInt(m.getMedicId()));
+                    this.instruction1.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Medico modificado");
+                    break;
             }
         } catch (SQLException ex) {
             Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);

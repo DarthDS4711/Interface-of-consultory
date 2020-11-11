@@ -2032,7 +2032,7 @@ public class AdminVist extends javax.swing.JFrame {
                 lastName2 = this.medicLastnameEdit.getText();
                 m.setName(name + " " + lastName1 + " " + lastName2);
                 this.server.openConecction();
-                this.server.updateMedic(m, 2);
+                this.server.updateMedic(m, 3);
                 this.server.closeConnection();
             } else {
                 this.server.openConecction();
@@ -2073,6 +2073,7 @@ public class AdminVist extends javax.swing.JFrame {
     //boton para cerrar sesión
     private void logOutPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutPBActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_logOutPBActionPerformed
     //boton para mostrar pacientes
     private void showPacientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPacientsActionPerformed
@@ -2134,6 +2135,7 @@ public class AdminVist extends javax.swing.JFrame {
     //propieties of system
     private String password;
     private Server server = new Server();
+    private Administrator admin = new Administrator();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField LastName;
     private javax.swing.JButton addCitePB;

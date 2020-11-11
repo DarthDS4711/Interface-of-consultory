@@ -574,6 +574,7 @@ public class MedicVist extends javax.swing.JFrame {
 
     private void logOutPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutPBActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_logOutPBActionPerformed
     //caja de selección de atención de la cita
     private void confirmAtentionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAtentionActionPerformed
@@ -636,7 +637,10 @@ public class MedicVist extends javax.swing.JFrame {
             String confirmPassword = this.ConfirmMedicPassword.getText();
             int validate = newPassword.length() + confirmPassword.length();
             if(validate >= 8 && confirmPassword.equals(newPassword)){
-                
+                this.server.openConecction();
+                this.m.setPassword(newPassword);
+                this.server.updateMedic(m, 2);
+                this.server.closeConnection();
             }
             else
                 JOptionPane.showMessageDialog(null, "Las contraseñas son diferentes");
