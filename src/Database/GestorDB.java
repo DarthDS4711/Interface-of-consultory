@@ -65,7 +65,7 @@ public class GestorDB {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de consulta");
+            JOptionPane.showMessageDialog(null, "Error: No se pudo establecer una conexíon a la base de datos");
         }
         closeInstruction();
         return pacients;
@@ -87,9 +87,9 @@ public class GestorDB {
             this.instruction1.setBoolean(9, pacient.isStatus());
             this.instruction1.setInt(10, pacient.getEdad());
             this.instruction1.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Paciente agregado");
+            JOptionPane.showMessageDialog(null, "Paciente agregado correctamente");
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: No se pudo establecer una conexíon a la base de datos");
         }
         closeInstruction1();
     }
@@ -106,7 +106,7 @@ public class GestorDB {
                 state = 1;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: el paciente no existe o no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction1();
         return state;
@@ -124,7 +124,7 @@ public class GestorDB {
                 this.instruction1.setString(1, pacient.getTelefono());
                 this.instruction1.setInt(2, Integer.parseInt(pacient.getId()));
                 this.instruction1.executeUpdate();
-                JOptionPane.showMessageDialog(null, "paciente modificado");
+                JOptionPane.showMessageDialog(null, "paciente modificado correctamente");
             } else {
                 this.instruction1 = this.conection.prepareStatement(sql_update);
                 this.instruction1.setString(1, pacient.getNombre());
@@ -133,10 +133,10 @@ public class GestorDB {
                 this.instruction1.setString(4, pacient.getTelefono());
                 this.instruction1.setInt(5, Integer.parseInt(pacient.getId()));
                 this.instruction1.executeUpdate();
-                JOptionPane.showMessageDialog(null, "paciente modificado");
+                JOptionPane.showMessageDialog(null, "paciente modificado correctamente");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: el paciente no existe o no se pudo establecer una conexión a la base de datos");
         }
     }
 
@@ -151,7 +151,7 @@ public class GestorDB {
             JOptionPane.showMessageDialog(null, "Paciente eliminado correctamente");
             closeInstruction1();
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: el paciente no existe o no se pudo establecer una conexión a la base de datos");
         }
     }
 
@@ -167,9 +167,9 @@ public class GestorDB {
             this.instruction1.setString(5, medic.getEspeciality());
             this.instruction1.setBoolean(6, medic.isStatus());
             this.instruction1.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Medico agregado");
+            JOptionPane.showMessageDialog(null, "Medico agregado correctamente");
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction1();
     }
@@ -194,7 +194,7 @@ public class GestorDB {
                 medics.add(m);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction();
         return medics;
@@ -212,7 +212,7 @@ public class GestorDB {
                 state = 1;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: el médico no existe o no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction1();
         return state;
@@ -233,14 +233,14 @@ public class GestorDB {
                     this.instruction1.setString(1, m.getTelephone());
                     this.instruction1.setInt(2, Integer.parseInt(m.getMedicId()));
                     this.instruction1.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Medico modificado");
+                    JOptionPane.showMessageDialog(null, "Medico modificado correctamente");
                     break;
                 case 2:
                     this.instruction1 = this.conection.prepareStatement(sql_update);
                     this.instruction1.setString(1, m.getPassword());
                     this.instruction1.setString(2, m.getMedicId());
                     this.instruction1.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Medico modificado");
+                    JOptionPane.showMessageDialog(null, "Medico modificado correctamente");
                     break;
                 default:
                     this.instruction1 = this.conection.prepareStatement(sql_update);
@@ -248,11 +248,11 @@ public class GestorDB {
                     this.instruction1.setString(2, m.getTelephone());
                     this.instruction1.setInt(3, Integer.parseInt(m.getMedicId()));
                     this.instruction1.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Medico modificado");
+                    JOptionPane.showMessageDialog(null, "Medico modificado correctamente");
                     break;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: el médico no existe o no se pudo establecer una conexión a la base de datos");
         }
     }
 
@@ -267,7 +267,7 @@ public class GestorDB {
             JOptionPane.showMessageDialog(null, "Medico eliminado correctamente");
             closeInstruction1();
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: el médico no existe o no se pudo establecer una conexión a la base de datos");
         }
     }
 
@@ -283,7 +283,7 @@ public class GestorDB {
             this.instruction1.executeUpdate();
             JOptionPane.showMessageDialog(null, "Cita agregada correctamente");
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(null, "Error: no se pudo establecer una conexión a la base de datos o el ID del paciente no existe");
         }
         closeInstruction1();
     }
@@ -307,7 +307,7 @@ public class GestorDB {
                 list.add(c);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction();
         return list;
@@ -327,7 +327,7 @@ public class GestorDB {
                 cites.add(c);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: el médico no existe o no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction1();
         return cites;
@@ -343,7 +343,7 @@ public class GestorDB {
                 status = 1;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: la cita médica no existe o no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction1();
         return status;
@@ -358,9 +358,9 @@ public class GestorDB {
             this.instruction1.setTimestamp(2, c.getDate());
             this.instruction1.setInt(3, c.getId());
             this.instruction1.executeUpdate();
-            JOptionPane.showMessageDialog(null, "cita modificado");
+            JOptionPane.showMessageDialog(null, "cita modificada correctamente");
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: la cita médica no existe o no se pudo establecer una conexión a la base de datos");
         }
     }
     public void deleteCite(int id){
@@ -374,7 +374,7 @@ public class GestorDB {
             JOptionPane.showMessageDialog(null, "cita eliminada correctamente");
             closeInstruction1();
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: la cita médica no existe o no se pudo establecer una conexión a la base de datos");
         }
     }
     //historial medico
@@ -393,7 +393,7 @@ public class GestorDB {
                 list.add(h);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction1();
         return list;
@@ -409,7 +409,7 @@ public class GestorDB {
             this.instruction1.executeUpdate();
             JOptionPane.showMessageDialog(null, "historial del paciente actualizado correctamente");
         } catch (SQLException ex) {
-            Logger.getLogger(GestorDB.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error: no se pudo establecer una conexión a la base de datos");
         }
         closeInstruction1();
     }

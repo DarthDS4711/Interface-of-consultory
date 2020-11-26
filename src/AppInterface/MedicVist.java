@@ -132,6 +132,7 @@ public class MedicVist extends javax.swing.JFrame {
         consultTreatment = new javax.swing.JTextField();
         consultMotif = new javax.swing.JTextField();
         finishConsultPB = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -318,11 +319,15 @@ public class MedicVist extends javax.swing.JFrame {
         finishConsultPB.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         finishConsultPB.setForeground(new java.awt.Color(255, 255, 255));
         finishConsultPB.setText("Finalizar Cita");
+        finishConsultPB.setEnabled(false);
         finishConsultPB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 finishConsultPBActionPerformed(evt);
             }
         });
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
+        jLabel17.setToolTipText("<html>\n<p><b>Nota: </b>Cada campo tiene una longitud máxima de 255 carácteres</p>\n<p><b>Nota 2: </b>No puedes finalizar una cita, que aún no estas atendiendo</p>\n</html>");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -339,17 +344,25 @@ public class MedicVist extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(consultTreatment, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(consultMotif, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                                .addComponent(jLabel17))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(280, 280, 280)
                         .addComponent(finishConsultPB)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel7)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel17)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -589,15 +602,14 @@ public class MedicVist extends javax.swing.JFrame {
         // TODO add your handling code here:
         int index = this.citesOfAttention.getSelectedIndex();
         int numberCite = Integer.parseInt(this.citesOfAttention.getItemAt(index));
-        System.out.println(numberCite);
         //acciones le la aplicación
         this.AtentionPane.setSelectedIndex(1);
         this.confirmAtention.setEnabled(false);
         this.startCitePB.setEnabled(false);
+        this.finishConsultPB.setEnabled(true);
         this.cite.setId(numberCite);
         int idPacient = obtainIdPacient(cite.getId());
         this.cite.setIdPacient(idPacient);
-        JOptionPane.showMessageDialog(null, cite.toString());
     }//GEN-LAST:event_startCitePBActionPerformed
     //boton de finalización de la cita
     private void finishConsultPBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishConsultPBActionPerformed
@@ -610,6 +622,7 @@ public class MedicVist extends javax.swing.JFrame {
             this.confirmAtention.setSelected(false);
             this.startCitePB.setEnabled(true);
             this.cite.setAttention(true);
+            this.finishConsultPB.setEnabled(false);
             //acciones de la base de datos inicio
             History h = new History();
             h.setId_medic(cite.getIdMedic());
@@ -728,6 +741,7 @@ public class MedicVist extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

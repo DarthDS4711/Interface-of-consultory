@@ -103,6 +103,26 @@ public class AdminVist extends javax.swing.JFrame {
         }
         this.tablePacients.setModel(model);
     }
+    private void printMedics(){
+        this.server.openConecction();
+        List<Medic> medics = this.server.getMedics();
+        this.server.closeConnection();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Nombre completo");
+        model.addColumn("Especialidad");
+        String data[] = new String[3];
+        for(Medic m: medics){
+            data[0] = m.getMedicId();
+            data[1] = m.getName();
+            data[2] = m.getEspeciality();
+            model.addRow(data);
+        }
+        this.tableMedic.setModel(model);
+        this.tableMedic.getColumnModel().getColumn(0).setResizable(true);
+        this.tableMedic.getColumnModel().getColumn(1).setResizable(true);
+        this.tableMedic.getColumnModel().getColumn(2).setResizable(true);
+    }
     private boolean validateDate(java.sql.Timestamp date) {
         boolean status = true;
         this.server.openConecction();
@@ -229,6 +249,10 @@ public class AdminVist extends javax.swing.JFrame {
         medicIdToDelete = new javax.swing.JTextField();
         confirmDeleteMedic = new javax.swing.JCheckBox();
         deleteMedicPB = new javax.swing.JButton();
+        jPanel19 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableMedic = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
@@ -419,7 +443,7 @@ public class AdminVist extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-registration-96.png"))); // NOI18N
 
         jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
-        jLabel39.setToolTipText("En esta sección de menú se registrarán nuevos usuarios");
+        jLabel39.setToolTipText("<html>\n<p><b>Nota 1:<b/> Los campos de Peso y Estatura deben ser números decimales<br/>\nEn donde Peso no puede ser mayor a 400kg y altura mayor a 2.5metros</p>\n<p><b/>Nota 2: </b>La longitud del teléfono debe de ser de exactamente 10 digitos</p>\n</html>");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -467,11 +491,9 @@ public class AdminVist extends javax.swing.JFrame {
                             .addComponent(sex, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(userPhone)
                             .addComponent(userHeigth)
-                            .addComponent(userDate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                        .addGap(62, 62, 62))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel39)
-                        .addGap(77, 77, 77))))
+                            .addComponent(userDate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                    .addComponent(jLabel39, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(62, 62, 62))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,9 +523,9 @@ public class AdminVist extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(71, 71, 71))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel39)
-                .addGap(46, 46, 46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(userHeigth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -600,7 +622,7 @@ public class AdminVist extends javax.swing.JFrame {
         });
 
         jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-help-32.png"))); // NOI18N
-        jLabel40.setToolTipText("<html>\n<p>\nEn esta sección del menú se modificará un usuario existente<br/>\n<strong>Nota:</strong> los campos bloqueados corresponden a información poco solicitada a modificar,<br/>\nsi necesita cambiarlos seleccione el campo \"Modificar campos bloqueados\"\n</p>\n</html>\n");
+        jLabel40.setToolTipText("<html>\n<p>\nEn esta sección del menú se modificará un usuario existente<br/>\n<strong>Nota:</strong> los campos bloqueados corresponden a información poco solicitada a modificar,<br/>\nsi necesita cambiarlos seleccione el campo \"Modificar campos bloqueados\"\n</p>\n<p><b>Nota 2: </b>La longitud del teléfono debe de ser igual a 10 dígitos</p>\n</html>\n");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1153,6 +1175,38 @@ public class AdminVist extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Eliminar", jPanel11);
 
+        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane3.setViewportView(tableMedic);
+
+        jButton4.setText("Mostrar Médicos");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(299, 299, 299)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addGap(0, 19, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Mostrar", jPanel19);
+
         jPanel3.add(jTabbedPane3);
 
         jTabbedPane1.addTab("Medicos", jPanel3);
@@ -1677,8 +1731,7 @@ public class AdminVist extends javax.swing.JFrame {
         }
         this.server.closeConnection();
         int validate = IDuser.length() + telephone.length();
-        if (validate >= 10) {
-            System.out.println("Hola");
+        if (validate >= 11) {
             if (this.unlockFields.isSelected()) {
                 name = this.usernameEdit.getText();
                 lastName1 = this.userFirstNameEdit.getText();
@@ -1698,7 +1751,6 @@ public class AdminVist extends javax.swing.JFrame {
                     this.server.updatePacient(p, 2);
                 }
             }
-            System.out.print(Integer.parseInt(p.getId()));
             this.server.openConecction();
             this.server.updatePacient(p, 1);
         } else {
@@ -1828,7 +1880,8 @@ public class AdminVist extends javax.swing.JFrame {
             this.server.addPacient(p, date);
             this.server.closeConnection();
         }
-
+        else
+            JOptionPane.showMessageDialog(null, "Error: existen campos con información vacia o de longitud invalida");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void editPBStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editPBStateChanged
@@ -2102,6 +2155,11 @@ public class AdminVist extends javax.swing.JFrame {
         printCites();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        printMedics();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2168,6 +2226,7 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2242,6 +2301,7 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2252,6 +2312,7 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
@@ -2277,6 +2338,7 @@ public class AdminVist extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sex;
     private javax.swing.JButton showPacients;
     private javax.swing.JTable tableCites;
+    private javax.swing.JTable tableMedic;
     private javax.swing.JTable tablePacients;
     private javax.swing.JCheckBox unlockFields;
     private javax.swing.JCheckBox unlockMedicFields;

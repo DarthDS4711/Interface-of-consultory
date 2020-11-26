@@ -45,7 +45,7 @@ public class Encripter {
             secretKey = new SecretKeySpec(keyEncripter, "AES");
             
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
-            Logger.getLogger(Encripter.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo generar la clave");
         }
         return secretKey; 
     }
@@ -60,7 +60,7 @@ public class Encripter {
             textEncrypt = Base64.getEncoder().encodeToString(byteEncrypt);
             
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | UnsupportedEncodingException | IllegalBlockSizeException | BadPaddingException ex) {
-            Logger.getLogger(Encripter.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo encriptar el contenido");
         }
         return textEncrypt;
     }
@@ -77,9 +77,9 @@ public class Encripter {
             admin.setPassword(password);
             input.close();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Encripter.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo encontrar el archivo del administrador");
         } catch (IOException ex) {
-            Logger.getLogger(Encripter.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo encontrar leer el archivo del administrador");
         }
         return admin;
     }
@@ -92,7 +92,7 @@ public class Encripter {
             output.close();
             JOptionPane.showMessageDialog(null, "Administrador modificado correctamente");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Encripter.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo encontrar el archivo del administrador");
         }
     }
 }
